@@ -1,5 +1,11 @@
-.category svg {
+.sidebar-category svg {
     margin-left: 71px;
+}
+
+.sidebar-main, .sidebar-finance, .sidebar-category, .dropdown-name, .sidebar-category button {
+    font-size: 14px;
+    line-height: 16px;
+    color: #052C65;
 }
 
 .balance {
@@ -21,12 +27,6 @@
     justify-content: center;
     align-items: center;
     margin-right: 16px;
-}
-
-.dropdown-name {
-    font-size: 14px;
-    line-height: 24px;
-    color: #052C65;
 }
 
 .dropdown-toggle::after {

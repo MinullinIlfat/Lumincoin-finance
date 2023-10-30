@@ -1,3 +1,9 @@
+.sidebar {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
 .sidebar-category svg {
     margin-left: 71px;
 }

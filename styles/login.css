@@ -1,17 +1,11 @@
 .container {
-
+    padding: 280px 0;
 }
 
 .logo {
     margin-bottom: 60px;
 }
 
-.title {
-    font-family: Roboto-Medium,sans-serif;
-    font-size: 40px;
-    color:#052C65;
-    margin-bottom: 20px;
-}
 
 .form-group {
 

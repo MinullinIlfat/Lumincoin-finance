@@ -15,3 +15,14 @@
 body {
     font-family: Roboto-Regular, sans-serif;
 }
+
+.container {
+    padding: 100px 0 133px 60px;
+}
+
+.title {
+    font-family: Roboto-Medium,sans-serif;
+    font-size: 40px;
+    color:#052C65;
+    margin-bottom: 20px;
+}

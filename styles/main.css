@@ -1,13 +1,4 @@
-.container {
-    padding: 100px 0 133px 60px;
-}
-h1 {
-    font-family: Roboto-Medium,sans-serif;
-    font-size: 40px;
-    line-height: 47px;
-    color: #052C65;
-    margin-bottom: 60px;
-}
+
 
 .menu ul li {
     list-style: none;
@@ -18,7 +9,7 @@ h1 {
     border: 1px solid #6C757D;
     padding: 9px 0;
     width: 100px;
-    font-family: Roboto-Medium,sans-serif;
+    font-family: Roboto-Medium, sans-serif;
     font-size: 16px;
     line-height: 19px;
     color: #6C757D;
@@ -33,7 +24,7 @@ h1 {
     color: #6C757D;
     text-decoration: none;
     border-bottom: 1px solid #6C757D;
-    font-family: Roboto-Medium,sans-serif;
+    font-family: Roboto-Medium, sans-serif;
     font-size: 16px;
     line-height: 19px;
 }

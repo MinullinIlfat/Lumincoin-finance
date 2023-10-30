@@ -1,12 +1,9 @@
-.logo {
-    margin-bottom: 60px;
+.container {
+    padding: 280px 0;
 }
 
-.title {
-    font-family: Roboto-Medium,sans-serif;
-    font-size: 40px;
-    color:#052C65;
-    margin-bottom: 20px;
+.logo {
+    margin-bottom: 60px;
 }
 
 .form-input {

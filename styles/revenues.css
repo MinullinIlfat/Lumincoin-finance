@@ -1,0 +1,29 @@
+.title {
+    margin-bottom: 40px;
+}
+
+.category-item {
+    border: 1px solid #CED4DA;
+    border-radius: 10px;
+    width: 352px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.category-item-name {
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 28px;
+    line-height: 33px;
+    color: #290661;
+    margin-bottom: 10px;
+}
+
+.category-item-add {
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 28px;
+    line-height: 33px;
+    color: #CED4DA;
+    text-align: center;
+    /*padding: 44px;*/
+}

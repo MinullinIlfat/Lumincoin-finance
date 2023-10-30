@@ -15,6 +15,16 @@
     color: #6C757D;
 }
 
+.active-btn {
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 11px 16px;
+    width: auto;
+    margin-bottom: 40px;
+}
+
 .btn:hover, .btn:active, .btn:visited, .btn:focus, .btn:focus-visible {
     background: #6C757D !important;
     color: #FFFFFF !important;
@@ -31,4 +41,8 @@
 
 .menu-date a {
     margin-left: 9px;
+}
+
+.table {
+    margin-top: 40px;
 }

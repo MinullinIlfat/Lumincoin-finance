@@ -27,3 +27,31 @@
     text-align: center;
     /*padding: 44px;*/
 }
+
+.popup {
+    max-width: 530px;
+    border: 1px solid #CED4DA;
+    border-radius: 12px;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    display: none;
+}
+
+.popup-text {
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 20px;
+    line-height: 23px;
+    color: #290661;
+}
+
+.btn {
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 11px 16px;
+}

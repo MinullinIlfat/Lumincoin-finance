@@ -58,6 +58,11 @@
     padding: 11px 16px;
 }
 
+.create {
+    display: flex;
+    flex-direction: column;
+}
+
 .create input {
     margin-bottom: 20px;
     border-radius: 5px;
@@ -65,5 +70,5 @@
     font-size: 15px;
     line-height: 24px;
     padding: 7px 0 7px 16px;
-    width: 397px;
+    max-width: 397px;
 }

@@ -5,14 +5,16 @@
     margin-right: 20px;
 }
 
-.btn {
+.button {
     border: 1px solid #6C757D;
+    border-radius: 4px;
     padding: 9px 0;
     width: 100px;
     font-family: Roboto-Medium, sans-serif;
     font-size: 16px;
     line-height: 19px;
     color: #6C757D;
+    background: white;
 }
 
 .active-btn {
@@ -25,7 +27,7 @@
     margin-bottom: 40px;
 }
 
-.btn:hover, .btn:active, .btn:visited, .btn:focus, .btn:focus-visible {
+.button:hover, .button:active, .button:visited, .button:focus, .button:focus-visible {
     background: #6C757D !important;
     color: #FFFFFF !important;
 }
@@ -45,4 +47,8 @@
 
 .table {
     margin-top: 40px;
+}
+
+.table svg {
+    cursor: pointer;
 }

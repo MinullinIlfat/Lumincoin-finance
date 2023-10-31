@@ -5,7 +5,7 @@
     <title>Вход</title>
     <link rel="stylesheet" href="../styles/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/signup.css">
+    <link rel="stylesheet" href="../styles/login.css">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
 </head>
 <body>
@@ -28,7 +28,7 @@
                         </svg>
                     </span>
                     <input type="text" class="form-control" placeholder="ФИО" aria-label="Username"
-                           aria-describedby="basic-addon1">
+                           aria-describedby="basic-addon1" id="name">
                 </div>
                 <div class="col input-group p-0 mb-2">
                     <span class="input-group-text" id="basic-addon1">
@@ -38,8 +38,8 @@
                                   fill="#6C757D"/>
                         </svg>
                     </span>
-                    <input type="email" class="form-control" placeholder="Электронная почта" aria-label="Username"
-                           aria-describedby="basic-addon1">
+                    <input type="email" class="form-control" placeholder="Электронная почта" aria-label="email"
+                           aria-describedby="basic-addon1" id="email">
                 </div>
                 <div class="col input-group p-0 mb-2">
                     <span class="input-group-text" id="basic-addon2">
@@ -49,8 +49,8 @@
                                   fill="#6C757D"/>
                         </svg>
                     </span>
-                    <input type="password" class="form-control" placeholder="Пароль" aria-label="Username"
-                           aria-describedby="basic-addon1">
+                    <input type="password" class="form-control" placeholder="Пароль" aria-label="password"
+                           aria-describedby="basic-addon1" id="password">
                 </div>
                 <div class="col input-group p-0 mb-2">
                     <span class="input-group-text" id="basic-addon3">
@@ -60,10 +60,10 @@
                                   fill="#6C757D"/>
                         </svg>
                     </span>
-                    <input type="password" class="form-control" placeholder="Подтверждение пароля" aria-label="Username"
+                    <input type="password" class="form-control" placeholder="Подтверждение пароля" aria-label="password"
                            aria-describedby="basic-addon1">
                 </div>
-                <button class="btn btn-primary mt-3 mb-2 p-2">
+                <button class="btn btn-primary mt-3 mb-2 p-2" disabled>
                     Войти
                 </button>
                 <div class="registration">
@@ -74,6 +74,6 @@
     </div>
 </div>
 <script src="../scripts/bootstrap.min.js"></script>
-<script src="../src/components/signup.js" type="module"></script>
+<script src="../src/components/signup.js"></script>
 </body>
 </html>

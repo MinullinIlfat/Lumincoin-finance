@@ -38,3 +38,11 @@
 .dropdown-toggle::after {
     display: none;
 }
+
+.sidebar-category svg {
+    transform: rotate(90deg);
+}
+
+.collapsed  svg{
+    transform: rotate(0);
+}

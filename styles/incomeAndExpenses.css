@@ -72,3 +72,7 @@
     padding: 7px 0 7px 16px;
     max-width: 397px;
 }
+
+.category-item-add {
+    cursor: pointer;
+}

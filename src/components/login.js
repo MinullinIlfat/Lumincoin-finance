@@ -1,17 +1,8 @@
-(function () {
-    const confirmPassword = document.getElementById('confirm-password');
-    const password = document.getElementById('password');
-    const SignUp = {
+(function (){
+    const Login = {
         agreeElement: null,
         processElement: null,
         fields: [
-            {
-                name: 'name',
-                id: 'name',
-                element: null,
-                regex: /^[А-Я][а-я]+\s*$/,
-                valid: false
-            },
             {
                 name: 'email',
                 id: 'email',
@@ -22,13 +13,6 @@
             {
                 name: 'password',
                 id: 'password',
-                element: null,
-                regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
-                valid: false
-            },
-            {
-                name: 'password',
-                id: 'confirm-password',
                 element: null,
                 regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
                 valid: false
@@ -47,10 +31,13 @@
             this.processElement.onclick = function () {
                 that.processForm()
             }
+
+            this.agreeElement = document.getElementById('flexCheckDefault');
+            this.agreeElement.onchange = function () {
+                that.validateForm();
+            }
         },
         validateField(field, element) {
-            console.log(password.value)
-            console.log(confirmPassword.value)
             if (!element.value || !element.value.match(field.regex)) {
                 element.style.setProperty("border", "1px solid red", "important")
                 field.valid = false;
@@ -60,17 +47,16 @@
             }
             this.validateForm();
         },
-
         validateForm() {
             const validForm = this.fields.every(item => item.valid);
-            if (validForm) {
+            const isValid = this.agreeElement.checked && validForm;
+            if(isValid) {
                 this.processElement.removeAttribute('disabled');
             } else {
                 this.processElement.setAttribute('disabled', 'disabled');
             }
-            return validForm;
+            return isValid;
         },
-
         processForm() {
             let paramString = '';
             if (this.validateForm()) {
@@ -83,5 +69,5 @@
         }
     };
 
-    SignUp.init();
+    Login.init();
 })();

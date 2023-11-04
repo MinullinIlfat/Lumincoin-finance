@@ -4,8 +4,20 @@
     box-sizing: border-box;
 }
 
+.sidebar ul li a:active, .sidebar ul li a:active path{
+    background: #0D6EFD;
+    color: white!important;
+    fill: white!important;;
+}
+
 .sidebar-category svg {
     margin-left: 71px;
+    transform: rotate(90deg);
+}
+
+
+.collapsed svg{
+    transform: rotate(0);
 }
 
 .sidebar-main, .sidebar-finance, .sidebar-category, .sidebar-dropdown-name, .sidebar-category button {
@@ -39,10 +51,15 @@
     display: none;
 }
 
-.sidebar-category svg {
-    transform: rotate(90deg);
+.sidebar-dropdown-name-exit {
+    margin: 10px 0 0 10px;
+    color: white;
+    padding: 1px 5px;
+    border-radius: 10px;
+    background: #0D6EFD;
+    border: 0;
+    display: none;
+    text-decoration: none;
+    text-align: center;
 }
 
-.collapsed  svg{
-    transform: rotate(0);
-}

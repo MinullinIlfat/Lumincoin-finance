@@ -16,6 +16,9 @@
     transform: rotate(90deg);
 }
 
+.sidebar-category a {
+    width: 174px;
+}
 
 .collapsed svg{
     transform: rotate(0);

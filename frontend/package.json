@@ -1,7 +1,6 @@
 {
   "name": "diplom2",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "chart.js": "^4.4.0"
@@ -11,5 +10,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

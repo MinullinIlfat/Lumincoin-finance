@@ -72,7 +72,7 @@ export class Router {
         document.getElementById('content').innerHTML =
             await fetch(newRoute.template).then(response => response.text());
         document.getElementById('styles').setAttribute('href', newRoute.styles);
-        document.getElementById('page-title').innerText = newRoute.title;
+        document.getElementById('title').innerText = newRoute.title;
         newRoute.load();
     }
 }

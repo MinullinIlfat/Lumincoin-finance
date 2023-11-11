@@ -1,4 +1,6 @@
 import {Router} from "./router.js";
+// import 'bootstrap';
+// import '../scripts/bootstrap.min.css';
 
 class App {
     constructor() {

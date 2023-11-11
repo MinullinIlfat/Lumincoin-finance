@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title id="title">Главная</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" id="styles" href="styles/index.css">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div class="d-flex">
+<section class="d-flex">
     <div class="sidebar d-flex flex-column flex-shrink-0 pe-3 ps-3 bg-light" style="width: 235px;">
         <a href="#" class="logo text-center">
             <img src="images/Logo.png" alt="Логотип">
@@ -19,7 +18,7 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="sidebar-main nav-item">
-                <a href="./tamplates/main.html" class="nav-link active align-items-center d-flex" aria-current="page">
+                <a href="templates/main.html" class="nav-link active align-items-center d-flex" aria-current="page">
                     <svg class="me-2" width="15" height="14" viewBox="0 0 15 14"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -36,7 +35,7 @@
                 </a>
             </li>
             <li class="sidebar-finance">
-                <a href="./tamplates/expensesAndIncome.html" class="pe-1 nav-link link-dark align-items-center d-flex">
+                <a href="templates/expensesAndIncome.html" class="pe-1 nav-link link-dark align-items-center d-flex">
                     <svg class="me-2" width="16" height="16" viewBox="0 0 16 16"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -67,12 +66,12 @@
                 </div>
                 <div class="collapse" id="orders-collapse" style="">
                     <ul class="link-dark p-1 rounded btn-toggle-nav list-unstyled fw-normal">
-                        <li><a href="./tamplates/income.html"
+                        <li><a href="templates/income.html"
                                class="link-dark active d-inline-flex text-decoration-none rounded pt-2 pb-2 ps-3 pe-2">Доходы</a>
                         </li>
                     </ul>
                     <ul class="p-1 btn-toggle-nav list-unstyled fw-normal">
-                        <li><a href="./tamplates/expenses.html"
+                        <li><a href="templates/expenses.html"
                                class="link-dark d-inline-flex text-decoration-none rounded pt-2 pb-2 ps-3 pe-2">Расходы</a>
                         </li>
                     </ul>
@@ -94,71 +93,20 @@
                 </div>
                 <strong class="sidebar-dropdown-name" id="dropdown-name">Ильфат Минуллин</strong>
             </a>
-            <a href="./tamplates/login.html" class="sidebar-dropdown-name-exit"
+            <a href="templates/login.html" class="sidebar-dropdown-name-exit"
                id="sidebar-dropdown-name-exit">Выйти</a>
         </div>
     </div>
-    <div class="container">
-        <h1 class="title">Главная</h1>
-        <div class="menu">
-            <ul class="d-flex align-items-center p-0">
-                <li class="nav-link active">
-                    <button class="button">Сегодня</button>
-                </li>
-                <li>
-                    <button class="button">Неделя</button>
-                </li>
-                <li>
-                    <button class="button">Месяц</button>
-                </li>
-                <li>
-                    <button class="button">Год</button>
-                </li>
-                <li>
-                    <button class="button">Все</button>
-                </li>
-                <li>
-                    <button class="button">Интервал</button>
-                </li>
-                <li class="menu-date">
-                    с <a href="#">Дата</a>
-                </li>
-                <li class="menu-date">
-                    по <a href="#">Дата</a>
-                </li>
-            </ul>
-        </div>
-        <div class="charts">
-            <div>
-                <span class="title">
-                    Доходы
-                </span>
-                <div class="chart">
-                    <canvas id="incomeChart">
+    <div id="content">
 
-                    </canvas>
-                </div>
-            </div>
-            <div class="divider">
-
-            </div>
-            <div>
-                    <span class="title">
-                        Расходы
-                    </span>
-                <div class="chart">
-                    <canvas id="expensesChart">
-
-                    </canvas>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+</section>
 
+<script src="src/app.js" type="module"></script>
+<script src="scripts/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="./scripts/bootstrap.min.js"></script>
 <script src="./src/components/common.js"></script>
 <script src="./src/components/main.js" type="module"></script>
+
 </body>
 </html>

@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование категории доходов</title>
+    <title>Создание категории доходов</title>
     <link rel="stylesheet" href="../styles/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/incomeAndExpenses.css">
+<!--    <link rel="stylesheet" href="../styles/incomeAndExpenses.css">-->
     <link rel="stylesheet" href="../styles/index.css">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
 </head>
@@ -100,22 +100,23 @@
         </div>
     </div>
     <div class="container">
-        <h1 class="title">Редактирование категории доходов</h1>
+        <h1 class="title">Создание категории доходов</h1>
         <div class="create">
-            <input type="text" placeholder="Зарплата">
+            <input type="text" placeholder="Название...">
             <div class="create-active">
-                <a href="#" class="btn btn-success me-2">Сохранить</a>
+                <a href="#" class="btn btn-success me-2">Создать</a>
                 <a href="income.html" class="btn btn-danger">Отмена</a>
             </div>
         </div>
     </div>
+
     <div class="popup">
         <div class="popup-text mb-4">
-            Вы действительно хотите удалить операцию?
+            Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.
         </div>
         <div class="popup-active">
-            <button class="btn active-btn btn-success me-3 mb-0">Да, удалить</button>
-            <button class="btn active-btn btn-danger mb-0">Не удалять</button>
+            <button class="btn btn-success me-3">Да, удалить</button>
+            <button class="btn btn-danger">Не удалять</button>
         </div>
     </div>
 </div>

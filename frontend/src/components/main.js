@@ -1,18 +1,18 @@
-var incomeChart = document.getElementById("incomeChart");
-var expensesChart = document.getElementById("expensesChart");
+let incomeChart = document.getElementById("incomeChart");
+let expensesChart = document.getElementById("expensesChart");
 
 Chart.defaults.global.defaultFontFamily = "Roboto-Medium";
 Chart.defaults.global.defaultFontSize = 12;
 Chart.defaults.global.defaultFontColor = "#000000";
 
-var canvasIncome = document.getElementById("incomeChart");
-canvasIncome.width = 414;
-canvasIncome.height = 467;
-var canvasExpenses = document.getElementById("expensesChart");
+// let canvasIncome = incomeChart;
+// canvasIncome.width = 414;
+// canvasIncome.height = 467;
+let canvasExpenses = expensesChart;
 canvasExpenses.width = 414;
 canvasExpenses.height = 467;
 
-var incomeChartData = {
+let incomeChartData = {
     labels: [
         "Red",
         "Orange",
@@ -33,12 +33,12 @@ var incomeChartData = {
         }]
 };
 
-var incomeChart = new Chart(incomeChart, {
+let incomeChartView = new Chart(incomeChart, {
     type: 'pie',
     data: incomeChartData
 });
 
-var expensesChartData = {
+let expensesChartData = {
     labels: [
         "Red",
         "Orange",
@@ -59,7 +59,7 @@ var expensesChartData = {
         }]
 };
 
-var expensesChart = new Chart(expensesChart, {
+let expensesChartView = new Chart(expensesChart, {
     type: 'pie',
     data: expensesChartData
 });

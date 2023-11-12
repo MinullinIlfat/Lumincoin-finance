@@ -1,4 +1,5 @@
-import {Form} from "./components/login.js";
+import {Login} from "./components/login.js";
+import {SignUp} from "./components/signup.js";
 
 export class Router {
     constructor() {
@@ -13,12 +14,21 @@ export class Router {
                 }
             },
             {
-                route: '#/form',
+                route: '#/login',
+                title: 'Войти',
+                template: 'templates/login.html',
+                styles: 'styles/login.css',
+                load: () => {
+                    new Login();
+                }
+            },
+            {
+                route: '#/signup',
                 title: 'Регистрация',
                 template: 'templates/signup.html',
                 styles: 'styles/login.css',
                 load: () => {
-                    new Form();
+                    new SignUp();
                 }
             },
             // {

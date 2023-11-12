@@ -1,4 +1,4 @@
-export class Form {
+export class Login {
     constructor() {
         this.agreeElement = null;
         this.processElement = null;
@@ -67,7 +67,7 @@ export class Form {
                 paramString += (!paramString ? '?' : '&') + item.name + '=' + item.element.value;
             })
 
-            location.href = 'main.html' + paramString;
+            location.href = '#/' + paramString;
         }
     };
 }

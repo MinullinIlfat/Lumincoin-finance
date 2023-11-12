@@ -1,10 +1,10 @@
-(function () {
-    const confirmPassword = document.getElementById('confirm-password');
-    const password = document.getElementById('password');
-    const SignUp = {
-        agreeElement: null,
-        processElement: null,
-        fields: [
+export class SignUp {
+    constructor() {
+        this.confirmPassword = document.getElementById('confirm-password');
+        this.password = document.getElementById('password');
+
+        this.processElement = null;
+        this.fields = [
             {
                 name: 'name',
                 id: 'name',
@@ -32,56 +32,51 @@
                 element: null,
                 regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
                 valid: false
-            },
-        ],
-        init() {
-            const that = this;
-            this.fields.forEach(item => {
-                item.element = document.getElementById(item.id);
-                item.element.onchange = function () {
-                    that.validateField.call(that, item, this);
-                }
-            });
-
-            this.processElement = document.getElementById('process');
-            this.processElement.onclick = function () {
-                that.processForm()
             }
-        },
-        validateField(field, element) {
-            console.log(password.value)
-            console.log(confirmPassword.value)
-            if (!element.value || !element.value.match(field.regex)) {
-                element.style.setProperty("border", "1px solid red", "important")
-                field.valid = false;
-            } else {
-                element.removeAttribute('style');
-                field.valid = true;
+        ];
+        const that = this;
+        this.fields.forEach(item => {
+            item.element = document.getElementById(item.id);
+            item.element.onchange = function () {
+                that.validateField.call(that, item, this);
             }
-            this.validateForm();
-        },
+        });
 
-        validateForm() {
-            const validForm = this.fields.every(item => item.valid);
-            if (validForm) {
-                this.processElement.removeAttribute('disabled');
-            } else {
-                this.processElement.setAttribute('disabled', 'disabled');
-            }
-            return validForm;
-        },
-
-        processForm() {
-            let paramString = '';
-            if (this.validateForm()) {
-                this.fields.forEach(item => {
-                    paramString += (!paramString ? '?' : '&') + item.name + '=' + item.element.value;
-                })
-
-                location.href = 'main.html' + paramString;
-            }
+        this.processElement = document.getElementById('process');
+        this.processElement.onclick = function () {
+            that.processForm()
         }
-    };
+    }
 
-    SignUp.init();
-})();
+    validateField(field, element) {
+        if (!element.value || !element.value.match(field.regex)) {
+            element.style.setProperty("border", "1px solid red", "important")
+            field.valid = false;
+        } else {
+            element.removeAttribute('style');
+            field.valid = true;
+        }
+        this.validateForm();
+    }
+
+    validateForm() {
+        const validForm = this.fields.every(item => item.valid);
+        if (validForm) {
+            this.processElement.removeAttribute('disabled');
+        } else {
+            this.processElement.setAttribute('disabled', 'disabled');
+        }
+        return validForm;
+    }
+
+    processForm() {
+        let paramString = '';
+        if (this.validateForm()) {
+            this.fields.forEach(item => {
+                paramString += (!paramString ? '?' : '&') + item.name + '=' + item.element.value;
+            })
+
+            location.href = '#/' + paramString;
+        }
+    }
+}

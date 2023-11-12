@@ -31,42 +31,88 @@ export class Router {
                     new SignUp();
                 }
             },
-            // {
-            //     route: '#/choice',
-            //     title: 'Выбор теста',
-            //     template: 'templates/choice.html',
-            //     styles: 'styles/choice.css',
-            //     load: () => {
-            //         new Choice();
-            //     }
-            // },
-            // {
-            //     route: '#/test',
-            //     title: 'Прохождение теста',
-            //     template: 'templates/test.html',
-            //     styles: 'styles/test.css',
-            //     load: () => {
-            //         new Test();
-            //     }
-            // },
-            // {
-            //     route: '#/result',
-            //     title: 'Результаты',
-            //     template: 'templates/result.html',
-            //     styles: 'styles/result.css',
-            //     load: () => {
-            //         new Result();
-            //     }
-            // },
-            // {
-            //     route: '#/right',
-            //     title: 'Правильные ответы',
-            //     template: 'templates/right.html',
-            //     styles: 'styles/right.css',
-            //     load: () => {
-            //         new Answers();
-            //     }
-            // },
+            {
+                route: '#/expensesAndIncome',
+                title: 'Главная',
+                template: 'templates/expensesAndIncome.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/income',
+                title: 'Главная',
+                template: 'templates/income.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/expenses',
+                title: 'Главная',
+                template: 'templates/expenses.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/editIncomeOrExpenses',
+                title: 'Главная',
+                template: 'templates/editIncomeOrExpenses.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/createIncomeOrExpenses',
+                title: 'Главная',
+                template: 'templates/createIncomeOrExpenses.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/editCategoryIncome',
+                title: 'Главная',
+                template: 'templates/editCategoryIncome.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/createCategoryIncome',
+                title: 'Главная',
+                template: 'templates/createCategoryIncome.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/editCategoryExpenses',
+                title: 'Главная',
+                template: 'templates/editCategoryExpenses.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/createCategoryExpenses',
+                title: 'Главная',
+                template: 'templates/createCategoryExpenses.html',
+                styles: 'styles/index.css',
+                load: () => {
+
+                }
+            },
+
         ]
     }
     async openRoute() {

@@ -5,9 +5,9 @@ Chart.defaults.global.defaultFontFamily = "Roboto-Medium";
 Chart.defaults.global.defaultFontSize = 12;
 Chart.defaults.global.defaultFontColor = "#000000";
 
-// let canvasIncome = incomeChart;
-// canvasIncome.width = 414;
-// canvasIncome.height = 467;
+let canvasIncome = incomeChart;
+canvasIncome.width = 414;
+canvasIncome.height = 467;
 let canvasExpenses = expensesChart;
 canvasExpenses.width = 414;
 canvasExpenses.height = 467;

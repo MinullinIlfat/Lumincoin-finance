@@ -1,8 +1,14 @@
-// import {Login} from "./components/login.js";
 import {SignUp} from "./components/signup.js";
+import {Auth} from "./services/auth.js";
 
 export class Router {
+
     constructor() {
+        this.contentElement = document.getElementById('content');
+        this.stylesElement = document.getElementById('styles');
+        this.pageTitleElement = document.getElementById('title');
+        this.profileFullNameElement = document.getElementById('profile-full-name');
+
         this.routes = [
             {
                 route: '#/',
@@ -116,19 +122,35 @@ export class Router {
         ]
     }
     async openRoute() {
-        const newRoute = this.routes.find(item => {
-            return item.route === window.location.hash.split('?')[0];
-        })
-
-        if (!newRoute) {
-            window.location.href = '#/';
+        const urlRoute = window.location.hash.split('?')[0];
+        if (urlRoute === '#/logout') {
+            Auth.removeTokens();
+            localStorage.removeItem(Auth.userInfoKey);
+            localStorage.removeItem('email');
+            window.location.href = '#/login';
             return;
         }
 
-        document.getElementById('content').innerHTML =
+        const newRoute = this.routes.find(item => {
+            return item.route === urlRoute;
+        })
+
+        if (!newRoute) {
+            window.location.href = '#/login';
+            return;
+        }
+
+        this.contentElement.innerHTML =
             await fetch(newRoute.template).then(response => response.text());
-        document.getElementById('styles').setAttribute('href', newRoute.styles);
-        document.getElementById('title').innerText = newRoute.title;
+        this.stylesElement.setAttribute('href', newRoute.styles);
+        this.pageTitleElement.innerText = newRoute.title;
+
+        const userInfo = Auth.getUserInfo();
+        const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        if (userInfo && accessToken) {
+            this.profileFullNameElement.innerText = userInfo.fullName;
+        }
+
         newRoute.load();
     }
 }

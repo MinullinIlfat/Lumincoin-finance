@@ -13,7 +13,7 @@ export class SignUp {
         //
         // const accessToken = localStorage.getItem(Auth.accessTokenKey);
         // if (accessToken) {
-        //     location.href = '#/';
+        //     location.href = '#/login';
         //     return;
         // }
 
@@ -114,7 +114,7 @@ export class SignUp {
                     });
                     if (result) {
                         if (!result.user) {
-                            throw new Error(result.message);
+                            console.log(123);
                         }
                     }
                 } catch (error) {
@@ -128,16 +128,16 @@ export class SignUp {
                     password: password,
                 });
                 if (result) {
-                    if (!result.accessToken || !result.refreshToken
-                        || !result.name || !result.id || !result.lastName) {
+                    if (!result.tokens.accessToken || !result.tokens.refreshToken
+                        || !result.user.name || !result.user.id || !result.user.lastName) {
                         // throw new Error(result.message);
                         console.log('ошибка')
                     }
 
-                    Auth.setTokens(result.accessToken, result.refreshToken);
+                    Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
                     Auth.setUserInfo({
-                        fullName: result.fullName,
-                        userId: result.userId
+                        fullName: result.user.name,
+                        userId: result.user.id
                     })
                     location.href = '#/';
                 }

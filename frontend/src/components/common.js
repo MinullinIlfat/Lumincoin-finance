@@ -1,6 +1,6 @@
 let exit = document.getElementById('sidebar-dropdown-name-exit');
 
-document.getElementById('dropdown-name').onclick = function () {
+document.getElementById('profile-full-name').onclick = function () {
     if (exit.style.display === 'none') {
         exit.style.display = 'block';
     } else {

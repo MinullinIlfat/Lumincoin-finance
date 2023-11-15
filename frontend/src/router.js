@@ -1,5 +1,6 @@
 import {SignUp} from "./components/signup.js";
 import {Auth} from "./services/auth.js";
+import {Income} from "./components/income.js";
 
 export class Router {
 
@@ -52,7 +53,7 @@ export class Router {
                 template: 'templates/income.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new Income()
                 }
             },
             {

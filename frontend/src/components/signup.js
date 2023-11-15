@@ -1,17 +1,24 @@
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
+import {Auth} from "../services/auth.js";
+
+
 export class SignUp {
-    constructor() {
-        this.confirmPassword = document.getElementById('confirm-password');
-        this.password = document.getElementById('password');
+    constructor(page) {
+        this.processElement = null;
+        this.agreeElement = null;
+        this.page = page;
+        // this.confirmPassword = document.getElementById('confirm-password');
+        // this.password = document.getElementById('password');
+        //
+        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        // if (accessToken) {
+        //     location.href = '#/';
+        //     return;
+        // }
 
         this.processElement = null;
         this.fields = [
-            {
-                name: 'name',
-                id: 'name',
-                element: null,
-                regex: /^[А-Я][а-я]+\s*$/,
-                valid: false
-            },
             {
                 name: 'email',
                 id: 'email',
@@ -26,14 +33,27 @@ export class SignUp {
                 regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
                 valid: false
             },
-            {
-                name: 'password',
-                id: 'confirm-password',
-                element: null,
-                regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
-                valid: false
-            }
         ];
+
+        if (this.page === 'signup') {
+            this.fields.unshift(
+                {
+                    name: 'name',
+                    id: 'name',
+                    element: null,
+                    regex: /^[А-Я][а-я]+\s*$/,
+                    valid: false
+                },
+                {
+                    name: 'confirm-password',
+                    id: 'confirm-password',
+                    element: null,
+                    regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                    valid: false
+                }
+            )
+        }
+
         const that = this;
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
@@ -45,6 +65,13 @@ export class SignUp {
         this.processElement = document.getElementById('process');
         this.processElement.onclick = function () {
             that.processForm()
+        }
+
+        if (this.page === 'login') {
+            this.agreeElement = document.getElementById('flexCheckDefault');
+            this.agreeElement.onchange = function () {
+                that.validateForm();
+            }
         }
     }
 
@@ -61,22 +88,62 @@ export class SignUp {
 
     validateForm() {
         const validForm = this.fields.every(item => item.valid);
-        if (validForm) {
+        const isValid = this.agreeElement ? this.agreeElement.checked && validForm : validForm;
+        if (isValid) {
             this.processElement.removeAttribute('disabled');
         } else {
             this.processElement.setAttribute('disabled', 'disabled');
         }
-        return validForm;
+        return isValid;
     }
 
-    processForm() {
-        let paramString = '';
+    async processForm() {
         if (this.validateForm()) {
-            this.fields.forEach(item => {
-                paramString += (!paramString ? '?' : '&') + item.name + '=' + item.element.value;
-            })
 
-            location.href = '#/' + paramString;
+            const email = this.fields.find(item => item.name === 'email').element.value;
+            const password = this.fields.find(item => item.name === 'password').element.value;
+            if (this.page === 'signup') {
+                const passwordRepeat = this.fields.find(item => item.name === 'confirm-password').element.value;
+                try {
+                    const result = await CustomHttp.request(config.host + '/signup', 'POST', {
+                        name: this.fields.find(item => item.name === 'name').element.value,
+                        lastName: this.fields.find(item => item.name === 'name').element.value,
+                        email: email,
+                        password: password,
+                        passwordRepeat: passwordRepeat,
+                    });
+                    if (result) {
+                        if (!result.user) {
+                            throw new Error(result.message);
+                        }
+                    }
+                } catch (error) {
+                    return console.log(error);
+                }
+            }
+
+            try {
+                const result = await CustomHttp.request(config.host + '/login', 'POST', {
+                    email: email,
+                    password: password,
+                });
+                if (result) {
+                    if (!result.accessToken || !result.refreshToken
+                        || !result.name || !result.id || !result.lastName) {
+                        // throw new Error(result.message);
+                        console.log('ошибка')
+                    }
+
+                    Auth.setTokens(result.accessToken, result.refreshToken);
+                    Auth.setUserInfo({
+                        fullName: result.fullName,
+                        userId: result.userId
+                    })
+                    location.href = '#/';
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 }

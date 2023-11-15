@@ -1,4 +1,4 @@
-import {Login} from "./components/login.js";
+// import {Login} from "./components/login.js";
 import {SignUp} from "./components/signup.js";
 
 export class Router {
@@ -19,7 +19,7 @@ export class Router {
                 template: 'templates/login.html',
                 styles: 'styles/login.css',
                 load: () => {
-                    new Login();
+                    new SignUp('login');
                 }
             },
             {
@@ -28,7 +28,7 @@ export class Router {
                 template: 'templates/signup.html',
                 styles: 'styles/login.css',
                 load: () => {
-                    new SignUp();
+                    new SignUp('signup');
                 }
             },
             {

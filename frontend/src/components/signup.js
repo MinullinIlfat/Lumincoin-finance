@@ -96,15 +96,18 @@ export class SignUp {
         } else {
             this.processElement.setAttribute('disabled', 'disabled');
         }
-        if (confirmPassword.value !== password.value) {
-            password.style.setProperty("border", "1px solid red", "important")
-            confirmPassword.style.setProperty("border", "1px solid red", "important")
-            this.processElement.setAttribute('disabled', 'disabled');
-        } else {
-            password.removeAttribute('style');
-            confirmPassword.removeAttribute('style');
-            this.processElement.removeAttribute('disabled');
+        if (this.page === 'signup') {
+            if (confirmPassword.value !== password.value) {
+                password.style.setProperty("border", "1px solid red", "important")
+                confirmPassword.style.setProperty("border", "1px solid red", "important")
+                this.processElement.setAttribute('disabled', 'disabled');
+            } else {
+                password.removeAttribute('style');
+                confirmPassword.removeAttribute('style');
+                this.processElement.removeAttribute('disabled');
+            }
         }
+
         return isValid;
     }
 

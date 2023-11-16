@@ -8,8 +8,7 @@ export class SignUp {
         this.processElement = null;
         this.agreeElement = null;
         this.page = page;
-        // this.confirmPassword = document.getElementById('confirm-password');
-        // this.password = document.getElementById('password');
+
         //
         // const accessToken = localStorage.getItem(Auth.accessTokenKey);
         // if (accessToken) {
@@ -87,12 +86,24 @@ export class SignUp {
     }
 
     validateForm() {
+        const confirmPassword = document.getElementById('confirm-password');
+        const password = document.getElementById('password');
+
         const validForm = this.fields.every(item => item.valid);
         const isValid = this.agreeElement ? this.agreeElement.checked && validForm : validForm;
         if (isValid) {
             this.processElement.removeAttribute('disabled');
         } else {
             this.processElement.setAttribute('disabled', 'disabled');
+        }
+        if (confirmPassword.value !== password.value) {
+            password.style.setProperty("border", "1px solid red", "important")
+            confirmPassword.style.setProperty("border", "1px solid red", "important")
+            this.processElement.setAttribute('disabled', 'disabled');
+        } else {
+            password.removeAttribute('style');
+            confirmPassword.removeAttribute('style');
+            this.processElement.removeAttribute('disabled');
         }
         return isValid;
     }

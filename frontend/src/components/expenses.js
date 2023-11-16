@@ -1,14 +1,14 @@
-export class Income {
+export class Expenses {
     constructor() {
-        this.incomeElement = document.getElementById('income')
         this.expensesElement = document.getElementById('expenses')
-        this.incomeTextElement = document.getElementById('income-text')
-        this.sidebarCategoryElement = document.getElementById('sidebar-category')
+        this.incomeElement = document.getElementById('income')
+        this.expensesTextElement = document.getElementById('expenses-text')
         this.categoryButtonElement = document.getElementById('category-button')
+        this.sidebarCategoryElement = document.getElementById('sidebar-category')
         this.orderCollapseElement = document.getElementById('orders-collapse')
         this.categorySvgElement = document.getElementById('category-svg')
-        this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
         this.buttonElements = document.querySelectorAll('.button-element')
+        this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
         this.collapseButtonElements = document.querySelectorAll('.collapse-button')
         this.svgElements = document.querySelectorAll('.svg-element')
         this.removeElement()
@@ -24,24 +24,23 @@ export class Income {
             item.style.setProperty("fill", "black", "important")
         })
         this.collapseButtonElements.forEach(item => {
-            item.classList.remove('nav-link', 'rounded')
+            item.classList.remove('nav-link')
         })
     }
     activeElement() {
-        this.incomeElement.classList.remove('link-dark')
-        this.incomeElement.classList.add('nav-link', 'active')
+        this.expensesElement.classList.remove('link-dark')
+        this.expensesElement.classList.add('nav-link', 'active')
         this.categoryButtonElement.classList.remove('link-dark', 'collapsed')
         this.categoryButtonElement.classList.add('nav-link', 'active')
-        this.incomeTextElement.classList.remove('link-dark')
-        this.incomeTextElement.classList.add('nav-link', 'active')
+        this.expensesTextElement.classList.remove('link-dark')
+        this.expensesTextElement.classList.add('nav-link', 'active')
         this.orderCollapseElement.classList.add('show')
         this.sidebarCategoryCollapseElements.classList.add('nav-link', 'active')
         this.categorySvgElement.style.fill = 'white'
 
         this.sidebarCategoryElement.style.border = '1px solid #0D6EFD'
         this.sidebarCategoryElement.style.borderRadius = '7px'
-        this.expensesElement.style.borderBottomLeftRadius = '7px'
-        this.expensesElement.style.borderBottomRightRadius = '7px'
-
+        this.incomeElement.style.borderBottomLeftRadius = '7px'
+        this.incomeElement.style.borderBottomRightRadius = '7px'
     }
 }

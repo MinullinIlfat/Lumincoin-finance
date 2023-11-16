@@ -1,6 +1,7 @@
 import {SignUp} from "./components/signup.js";
 import {Auth} from "./services/auth.js";
 import {Income} from "./components/income.js";
+import {Expenses} from "./components/expenses.js";
 
 export class Router {
 
@@ -62,7 +63,7 @@ export class Router {
                 template: 'templates/expenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new Expenses()
                 }
             },
             {

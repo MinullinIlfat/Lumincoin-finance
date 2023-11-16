@@ -7,3 +7,6 @@ document.getElementById('profile-full-name').onclick = function () {
         exit.style.display = 'none';
     }
 }
+
+mainSvgElement = document.querySelector('.main-svg');
+mainSvgElement.style.fill = 'white';

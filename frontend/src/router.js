@@ -2,6 +2,8 @@ import {SignUp} from "./components/signup.js";
 import {Auth} from "./services/auth.js";
 import {Income} from "./components/income.js";
 import {Expenses} from "./components/expenses.js";
+import {Main} from "./components/main.js";
+import {ExpensesAndIncome} from "./components/expensesAndIncome.js";
 
 export class Router {
 
@@ -18,7 +20,7 @@ export class Router {
                 template: 'templates/main.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new Main()
                 }
             },
             {
@@ -45,7 +47,7 @@ export class Router {
                 template: 'templates/expensesAndIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new ExpensesAndIncome()
                 }
             },
             {

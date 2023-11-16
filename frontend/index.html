@@ -17,9 +17,9 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="sidebar-main nav-item">
-                <a href="#/" class="button-element nav-link active align-items-center d-flex" id="main-text" aria-current="page">
-                    <svg class="svg-element main-svg me-2" width="15" height="14" viewBox="0 0 15 14"
+            <li class="sidebar-main nav-item p-0" id="sidebar-main">
+                <a href="#/" id="sidebar-main-text" class="button-element nav-link active align-items-center d-flex" aria-current="page">
+                    <svg id="sidebar-main-svg" class="svg-element main-svg me-2" width="15" height="14" viewBox="0 0 15 14"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M1.5 12.3964V5.89644H2.5V12.3964C2.5 12.6726 2.72386 12.8964 3 12.8964H12C12.2761 12.8964 12.5 12.6726 12.5 12.3964V5.89644H13.5V12.3964C13.5 13.2249 12.8284 13.8964 12 13.8964H3C2.17157 13.8964 1.5 13.2249 1.5 12.3964Z"
@@ -34,9 +34,9 @@
                     Главная
                 </a>
             </li>
-            <li class="sidebar-finance">
-                <a href="#/expensesAndIncome" class="button-element pe-1 nav-link link-dark align-items-center d-flex">
-                    <svg class="me-2" width="16" height="16" viewBox="0 0 16 16"
+            <li class="sidebar-finance p-0" id="sidebar-finance">
+                <a href="#/expensesAndIncome" id="sidebar-finance-text" class="button-element pe-1 nav-link link-dark align-items-center d-flex">
+                    <svg class="me-2" id="sidebar-finance-svg" width="16" height="16" viewBox="0 0 16 16"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M11 15C13.2091 15 15 13.2091 15 11C15 8.79086 13.2091 7 11 7C8.79086 7 7 8.79086 7 11C7 13.2091 8.79086 15 11 15ZM16 11C16 13.7614 13.7614 16 11 16C8.23858 16 6 13.7614 6 11C6 8.23858 8.23858 6 11 6C13.7614 6 16 8.23858 16 11Z"
@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <div class="collapse" id="orders-collapse" style="">
-                    <ul class="button-element collapse-button link-dark p-1 rounded btn-toggle-nav list-unstyled fw-normal" id="income">
+                    <ul class="button-element collapse-button link-dark p-1 btn-toggle-nav list-unstyled fw-normal" id="income">
                         <li><a href="#/income" id="income-text"
                                class="button-element small-button link-dark d-inline-flex text-decoration-none rounded pt-2 pb-2 ps-3 pe-2">Доходы</a>
                         </li>

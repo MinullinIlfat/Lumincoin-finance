@@ -51,6 +51,11 @@
     fill: white !important;
 }
 
+.sidebar-main:hover a svg, .sidebar-finance:hover a svg {
+    color: white !important;
+    fill: white !important;
+}
+
 
 
 .sidebar-main a, .sidebar-finance a, .sidebar-category-collapse a {

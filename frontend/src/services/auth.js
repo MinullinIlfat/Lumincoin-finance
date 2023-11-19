@@ -18,7 +18,7 @@ export class Auth {
             });
             if (response && response.status === 200) {
                 const result = await response.json();
-                if (result && result.error){
+                if (result){
                     this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
                     return true;
                 }
@@ -29,10 +29,6 @@ export class Auth {
         location.href = '#/login';
         return false;
     }
-
-    // static async logout() {
-    //
-    // }
 
     static setTokens(accessToken, refreshToken) {
         localStorage.setItem(this.accessTokenKey, accessToken);

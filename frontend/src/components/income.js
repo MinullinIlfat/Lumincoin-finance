@@ -26,10 +26,15 @@ export class Income {
 
         this.editBtnElements = document.querySelectorAll('.edit-btn-income')
 
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn ')
+        this.popupIncome = document.getElementById('popup-income')
+        this.content = document.getElementById('content')
+        this.sidebar = document.getElementById('sidebar')
+
         this.removeElement()
         this.inactive ()
         this.activeElement()
-
+        this.deleteBtn()
         this.editBtnActive()
     }
 
@@ -91,6 +96,15 @@ export class Income {
             item.onclick = function () {
                 const result = item.parentElement.previousElementSibling.textContent
                 localStorage.setItem('BlockName', JSON.stringify(result))
+            }
+        })
+    }
+
+    deleteBtn() {
+        const that = this
+        this.deleteBtnElement.forEach(item => {
+            item.onclick = function () {
+                that.popupIncome.style.display = 'grid'
             }
         })
     }

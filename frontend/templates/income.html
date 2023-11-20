@@ -7,7 +7,7 @@
             </div>
             <div class="category-item-active">
                 <a href="#/editCategoryIncome" class="edit-btn-income btn btn-primary me-2">Редактировать</a>
-                <a href="#" class="btn btn-danger">Удалить</a>
+                <button class="delete-btn btn btn-danger">Удалить</button>
             </div>
         </div>
         <div class="category-item">
@@ -16,7 +16,7 @@
             </div>
             <div class="category-item-active">
                 <a href="#/editCategoryIncome" class="edit-btn-income btn btn-primary me-2">Редактировать</a>
-                <a href="#" class="btn btn-danger">Удалить</a>
+                <button class="delete-btn btn btn-danger">Удалить</button>
             </div>
         </div>
         <div class="category-item">
@@ -25,7 +25,7 @@
             </div>
             <div class="category-item-active">
                 <a href="#/editCategoryIncome" class="edit-btn-income btn btn-primary me-2">Редактировать</a>
-                <a href="#" class="btn btn-danger">Удалить</a>
+                <button class="delete-btn btn btn-danger">Удалить</button>
             </div>
         </div>
         <div class="category-item">
@@ -34,7 +34,7 @@
             </div>
             <div class="category-item-active">
                 <a href="#/editCategoryIncome" class="edit-btn-income btn btn-primary me-2">Редактировать</a>
-                <a href="#" class=" btn btn-danger">Удалить</a>
+                <button class="delete-btn btn btn-danger">Удалить</button>
             </div>
         </div>
         <a href="#/createCategoryIncome"
@@ -43,13 +43,15 @@
         </a>
     </div>
 
-    <div class="popup">
-        <div class="popup-text mb-4">
-            Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.
-        </div>
-        <div class="popup-active">
-            <button class="btn btn-success me-3">Да, удалить</button>
-            <button class="btn btn-danger">Не удалять</button>
+    <div class="popup" id="popup-income">
+        <div class="popup-box">
+            <div class="popup-text mb-4">
+                Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.
+            </div>
+            <div class="popup-active">
+                <button class="btn btn-success me-3">Да, удалить</button>
+                <a href="#/income" class="btn btn-danger">Не удалять</a>
+            </div>
         </div>
     </div>
 </section>

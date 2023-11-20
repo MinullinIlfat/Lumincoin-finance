@@ -23,10 +23,13 @@ export class Expenses {
 
         this.editBtnElements = document.querySelectorAll('.edit-btn-expenses')
 
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn ')
+        this.popupExpenses = document.getElementById('popup-expenses')
+
         this.removeElement()
         this.inactive ()
         this.activeElement()
-
+        this.deleteBtn()
         this.editBtnActive()
     }
 
@@ -88,6 +91,15 @@ export class Expenses {
             item.onclick = function () {
                 const result = item.parentElement.previousElementSibling.textContent
                 localStorage.setItem('BlockName', JSON.stringify(result))
+            }
+        })
+    }
+
+    deleteBtn() {
+        const that = this
+        this.deleteBtnElement.forEach(item => {
+            item.onclick = function () {
+                that.popupExpenses.style.display = 'grid'
             }
         })
     }

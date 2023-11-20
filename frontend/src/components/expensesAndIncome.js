@@ -2,20 +2,29 @@ export class ExpensesAndIncome {
     constructor() {
         this.buttonElements = document.querySelectorAll('.button-element')
         this.svgElements = document.querySelectorAll('.svg-element')
+        this.collapseButtonElements = document.querySelectorAll('.collapse-button')
+
         this.sidebarFinance = document.getElementById('sidebar-finance')
         this.sidebarFinanceText = document.getElementById('sidebar-finance-text')
         this.sidebarFinanceSvg = document.getElementById('sidebar-finance-svg')
+
         this.orderCollapseElement = document.getElementById('orders-collapse')
         this.categoryButtonElement = document.getElementById('category-button')
         this.categorySvgElement = document.getElementById('category-svg')
         this.sidebarCategoryElement = document.getElementById('sidebar-category')
-        this.collapseButtonElements = document.querySelectorAll('.collapse-button')
+
         this.sidebarMain = document.getElementById('sidebar-main');
         this.sidebarMainText = document.getElementById('sidebar-main-text');
         this.ssidebarMainSvg = document.getElementById('sidebar-main-svg');
+
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
+
+        this.popupExpAndInc = document.getElementById('popup-expense-and-income')
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+
         this.removeElement()
         this.inactive()
+        this.deleteBtn()
         this.activeElement()
     }
 
@@ -57,5 +66,14 @@ export class ExpensesAndIncome {
         this.sidebarMainText.classList.remove( 'active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
+    }
+
+    deleteBtn() {
+        const that = this
+        this.deleteBtnElement.forEach(item => {
+            item.onclick = function () {
+                that.popupExpAndInc.style.display = 'grid'
+            }
+        })
     }
 }

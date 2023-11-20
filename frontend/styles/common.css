@@ -99,6 +99,11 @@ body {
     padding: 11px 16px;
 }
 
+.btn-svg {
+    border: 0;
+    background: transparent;
+}
+
 .create {
     display: flex;
     flex-direction: column;

@@ -26,10 +26,8 @@ export class Income {
 
         this.editBtnElements = document.querySelectorAll('.edit-btn-income')
 
-        this.deleteBtnElement = document.querySelectorAll('.delete-btn ')
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
         this.popupIncome = document.getElementById('popup-income')
-        this.content = document.getElementById('content')
-        this.sidebar = document.getElementById('sidebar')
 
         this.removeElement()
         this.inactive ()

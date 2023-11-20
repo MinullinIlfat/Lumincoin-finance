@@ -21,9 +21,13 @@ export class Expenses {
         this.sidebarMainText = document.getElementById('sidebar-main-text');
         this.ssidebarMainSvg = document.getElementById('sidebar-main-svg');
 
+        this.editBtnElements = document.querySelectorAll('.edit-btn-expenses')
+
         this.removeElement()
         this.inactive ()
         this.activeElement()
+
+        this.editBtnActive()
     }
 
     removeElement() {
@@ -77,5 +81,14 @@ export class Expenses {
         this.sidebarMainText.classList.remove( 'active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
+    }
+
+    editBtnActive() {
+        this.editBtnElements.forEach(item => {
+            item.onclick = function () {
+                const result = item.parentElement.previousElementSibling.textContent
+                localStorage.setItem('BlockName', JSON.stringify(result))
+            }
+        })
     }
 }

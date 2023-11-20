@@ -1,14 +1,17 @@
 export class Income {
     constructor() {
         this.incomeElement = document.getElementById('income')
-        this.expensesElement = document.getElementById('expenses')
         this.incomeTextElement = document.getElementById('income-text')
+
+        this.expensesElement = document.getElementById('expenses')
         this.expensesTextElement = document.getElementById('expenses-text')
+
         this.sidebarCategoryElement = document.getElementById('sidebar-category')
         this.categoryButtonElement = document.getElementById('category-button')
         this.orderCollapseElement = document.getElementById('orders-collapse')
         this.categorySvgElement = document.getElementById('category-svg')
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
+
         this.buttonElements = document.querySelectorAll('.button-element')
         this.collapseButtonElements = document.querySelectorAll('.collapse-button')
         this.svgElements = document.querySelectorAll('.svg-element')
@@ -21,9 +24,13 @@ export class Income {
         this.sidebarMainText = document.getElementById('sidebar-main-text');
         this.ssidebarMainSvg = document.getElementById('sidebar-main-svg');
 
+        this.editBtnElements = document.querySelectorAll('.edit-btn-income')
+
         this.removeElement()
         this.inactive ()
         this.activeElement()
+
+        this.editBtnActive()
     }
 
     removeElement() {
@@ -77,5 +84,14 @@ export class Income {
         this.sidebarMainText.classList.remove( 'active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
+    }
+
+    editBtnActive() {
+        this.editBtnElements.forEach(item => {
+            item.onclick = function () {
+                const result = item.parentElement.previousElementSibling.textContent
+                localStorage.setItem('BlockName', JSON.stringify(result))
+            }
+        })
     }
 }

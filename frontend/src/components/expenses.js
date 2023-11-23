@@ -98,10 +98,22 @@ export class Expenses {
         })
 
         this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+        this.popupDeleteCategory = document.getElementById('popup-delete-category-expense')
         const that = this
         this.deleteBtnElement.forEach(item => {
             item.onclick = function () {
                 that.popupExpenses.style.display = 'grid'
+                that.popupDeleteCategory.onclick = function () {
+                    let resultId = item.parentElement.parentElement.id
+                    try {
+                        const result = CustomHttp.request(config.host + '/categories/expense/' + resultId, "DELETE");
+                        if (result) {
+                            location.href = '#/expenses'
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
             }
         })
     }

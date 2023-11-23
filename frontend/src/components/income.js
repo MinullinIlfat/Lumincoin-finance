@@ -104,10 +104,22 @@ export class Income {
         })
 
         this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+        this.popupDeleteCategory = document.getElementById('popup-delete-category-income')
         const that = this
         this.deleteBtnElement.forEach(item => {
             item.onclick = function () {
                 that.popupIncome.style.display = 'grid'
+                that.popupDeleteCategory.onclick = function () {
+                    let resultId = item.parentElement.parentElement.id
+                    try {
+                        const result = CustomHttp.request(config.host + '/categories/income/' + resultId, "DELETE");
+                        if (result) {
+                            location.href = '#/income'
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
             }
         })
     }

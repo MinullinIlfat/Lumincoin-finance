@@ -1,5 +1,10 @@
+import config from "../../config/config.js";
+import {Auth} from "../services/auth.js";
+import {CustomHttp} from "../services/custom-http.js";
+
 export class Income {
     constructor() {
+        this.init()
         this.incomeElement = document.getElementById('income')
         this.incomeTextElement = document.getElementById('income-text')
 
@@ -29,11 +34,77 @@ export class Income {
         this.deleteBtnElement = document.querySelectorAll('.delete-btn')
         this.popupIncome = document.getElementById('popup-income')
 
+
         this.removeElement()
-        this.inactive ()
+        this.inactive()
         this.activeElement()
         this.deleteBtn()
         this.editBtnActive()
+
+        this.quiz = null
+        this.quizName = null
+    }
+
+    async init() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/'
+        }
+        // if (this.routeParams.id) {
+        try {
+            const result = await CustomHttp.request(config.host + '/categories/income');
+            if (result) {
+                // if (result.error) {
+                //     throw new Error(result.error);
+                // }
+                this.quiz = result.id;
+                this.quizName = result.title
+                this.showIncomeElements(result)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        // }
+    }
+
+    showIncomeElements(result) {
+        const categoryItems = document.getElementById('category-items');
+
+        result.forEach(item => {
+            const categoryItem = document.createElement('div');
+            categoryItem.className = 'category-item';
+
+            const categoryItemName = document.createElement('div');
+            categoryItemName.className = 'category-item-name';
+            categoryItemName.innerText = item.title;
+
+            const categoryItemActive = document.createElement('div');
+            categoryItemActive.className = 'category-item-active';
+
+            const editBtnIncome = document.createElement('a');
+            editBtnIncome.setAttribute('href', '#/editCategoryIncome');
+            editBtnIncome.className = 'edit-btn-income btn btn-primary me-2';
+            editBtnIncome.innerText = 'Редактировать';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn btn btn-danger';
+            deleteBtn.innerText = 'Удалить';
+
+
+
+            categoryItemActive.appendChild(editBtnIncome)
+            categoryItemActive.appendChild(deleteBtn)
+
+            categoryItem.appendChild(categoryItemName)
+            categoryItem.appendChild(categoryItemActive)
+            categoryItems.appendChild(categoryItem)
+        })
+        const categoryItemAdd = document.createElement('a');
+        categoryItemAdd.className = 'category-item category-item-add d-flex justify-content-center align-items-center';
+        categoryItemAdd.setAttribute('href', '#/createCategoryIncome');
+        categoryItemAdd.innerText = '+';
+
+        categoryItems.appendChild(categoryItemAdd)
     }
 
     removeElement() {
@@ -48,6 +119,7 @@ export class Income {
             item.classList.remove('nav-link', 'rounded')
         })
     }
+
     activeElement() {
         this.incomeElement.classList.remove('link-dark')
         this.incomeElement.classList.add('nav-link', 'active')
@@ -72,26 +144,28 @@ export class Income {
         this.sidebarCategoryElement.style.borderRadius = '5px'
     }
 
-    inactive () {
+    inactive() {
         this.expensesTextElement.classList.remove('link-dark')
         this.expensesElement.style.borderRadius = '0px'
         this.expensesElement.style.borderBottomLeftRadius = '5px'
         this.expensesElement.style.borderBottomRightRadius = '5px'
 
         this.sidebarFinance.classList.remove('nav-link', 'active')
-        this.sidebarFinanceText.classList.remove( 'active')
+        this.sidebarFinanceText.classList.remove('active')
         this.sidebarFinanceText.classList.add('link-dark')
         this.sidebarFinanceSvg.style.fill = 'black'
 
         this.sidebarMain.classList.remove('nav-link', 'active');
-        this.sidebarMainText.classList.remove( 'active');
+        this.sidebarMainText.classList.remove('active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
     }
 
     editBtnActive() {
+        console.log(this.editBtnElements)
         this.editBtnElements.forEach(item => {
             item.onclick = function () {
+                console.log(item)
                 const result = item.parentElement.previousElementSibling.textContent
                 localStorage.setItem('BlockName', JSON.stringify(result))
             }
@@ -106,4 +180,6 @@ export class Income {
             }
         })
     }
+
+
 }

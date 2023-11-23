@@ -35,39 +35,32 @@ export class Income {
         this.inactive()
         this.activeElement()
         this.init()
-
-        this.quiz = null
-        this.quizName = null
     }
 
     async init() {
         const userInfo = Auth.getUserInfo();
         if (!userInfo) {
-            location.href = '#/'
+            location.href = '#/login'
         }
-        // if (this.routeParams.id) {
+
         try {
             const result = await CustomHttp.request(config.host + '/categories/income');
             if (result) {
-                // if (result.error) {
-                //     throw new Error(result.error);
-                // }
-                this.quiz = result.id;
-                this.quizName = result.title
+
                 this.showIncomeElements(result)
             }
         } catch (error) {
             console.log(error);
         }
-        // }
     }
 
     showIncomeElements(result) {
-        const categoryItems = document.getElementById('category-items');
+        const categoryItems = document.getElementById('category-income-items');
 
         result.forEach(item => {
             const categoryItem = document.createElement('div');
             categoryItem.className = 'category-item';
+            categoryItem.setAttribute('id', item.id)
 
             const categoryItemName = document.createElement('div');
             categoryItemName.className = 'category-item-name';
@@ -104,7 +97,9 @@ export class Income {
         this.editBtnElements.forEach(item => {
             item.onclick = function () {
                 const result = item.parentElement.previousElementSibling.textContent
+                const resultId = item.parentElement.parentElement.id
                 localStorage.setItem('BlockName', JSON.stringify(result))
+                localStorage.setItem('BlockId', JSON.stringify(resultId))
             }
         })
 
@@ -128,6 +123,9 @@ export class Income {
         this.collapseButtonElements.forEach(item => {
             item.classList.remove('nav-link', 'rounded')
         })
+
+        localStorage.removeItem('BlockName')
+        localStorage.removeItem('BlockId')
     }
 
     activeElement() {

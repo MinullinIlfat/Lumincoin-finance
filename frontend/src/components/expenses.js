@@ -1,3 +1,7 @@
+import {Auth} from "../services/auth.js";
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
+
 export class Expenses {
     constructor() {
         this.expensesElement = document.getElementById('expenses')
@@ -21,16 +25,85 @@ export class Expenses {
         this.sidebarMainText = document.getElementById('sidebar-main-text');
         this.ssidebarMainSvg = document.getElementById('sidebar-main-svg');
 
-        this.editBtnElements = document.querySelectorAll('.edit-btn-expenses')
-
-        this.deleteBtnElement = document.querySelectorAll('.delete-btn ')
         this.popupExpenses = document.getElementById('popup-expenses')
 
         this.removeElement()
         this.inactive ()
         this.activeElement()
-        this.deleteBtn()
-        this.editBtnActive()
+        this.init()
+    }
+
+    async init() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const result = await CustomHttp.request(config.host + '/categories/expense');
+            if (result) {
+                this.showExpenseElements(result)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    showExpenseElements(result) {
+        const categoryItems = document.getElementById('category-expense-items');
+
+        result.forEach(item => {
+            const categoryItem = document.createElement('div');
+            categoryItem.className = 'category-item';
+            categoryItem.setAttribute('id', item.id)
+
+            const categoryItemName = document.createElement('div');
+            categoryItemName.className = 'category-item-name';
+            categoryItemName.innerText = item.title;
+
+            const categoryItemActive = document.createElement('div');
+            categoryItemActive.className = 'category-item-active';
+
+            const editBtnIncome = document.createElement('a');
+            editBtnIncome.setAttribute('href', '#/editCategoryExpenses');
+            editBtnIncome.className = 'edit-btn-expenses btn btn-primary me-2';
+            editBtnIncome.innerText = 'Редактировать';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn btn btn-danger';
+            deleteBtn.innerText = 'Удалить';
+
+            categoryItemActive.appendChild(editBtnIncome)
+            categoryItemActive.appendChild(deleteBtn)
+
+            categoryItem.appendChild(categoryItemName)
+            categoryItem.appendChild(categoryItemActive)
+            categoryItems.appendChild(categoryItem)
+        })
+
+        const categoryItemAdd = document.createElement('a');
+        categoryItemAdd.className = 'category-item category-item-add d-flex justify-content-center align-items-center';
+        categoryItemAdd.setAttribute('href', '#/createCategoryExpenses');
+        categoryItemAdd.innerText = '+';
+
+        categoryItems.appendChild(categoryItemAdd)
+
+        this.editBtnElements = document.querySelectorAll('.edit-btn-expenses')
+        this.editBtnElements.forEach(item => {
+            item.onclick = function () {
+                const result = item.parentElement.previousElementSibling.textContent
+                const resultId = item.parentElement.parentElement.id
+                localStorage.setItem('BlockName', JSON.stringify(result))
+                localStorage.setItem('BlockId', JSON.stringify(resultId))
+            }
+        })
+
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+        const that = this
+        this.deleteBtnElement.forEach(item => {
+            item.onclick = function () {
+                that.popupExpenses.style.display = 'grid'
+            }
+        })
     }
 
     removeElement() {
@@ -44,6 +117,9 @@ export class Expenses {
         this.collapseButtonElements.forEach(item => {
             item.classList.remove('nav-link')
         })
+
+        localStorage.removeItem('BlockName')
+        localStorage.removeItem('BlockId')
     }
     activeElement() {
         this.expensesElement.classList.remove('link-dark')
@@ -84,23 +160,5 @@ export class Expenses {
         this.sidebarMainText.classList.remove( 'active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
-    }
-
-    editBtnActive() {
-        this.editBtnElements.forEach(item => {
-            item.onclick = function () {
-                const result = item.parentElement.previousElementSibling.textContent
-                localStorage.setItem('BlockName', JSON.stringify(result))
-            }
-        })
-    }
-
-    deleteBtn() {
-        const that = this
-        this.deleteBtnElement.forEach(item => {
-            item.onclick = function () {
-                that.popupExpenses.style.display = 'grid'
-            }
-        })
     }
 }

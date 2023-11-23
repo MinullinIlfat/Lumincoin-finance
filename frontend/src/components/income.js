@@ -4,42 +4,37 @@ import {CustomHttp} from "../services/custom-http.js";
 
 export class Income {
     constructor() {
-        this.init()
-        this.incomeElement = document.getElementById('income')
-        this.incomeTextElement = document.getElementById('income-text')
+        this.incomeElement = document.getElementById('income');
+        this.incomeTextElement = document.getElementById('income-text');
 
-        this.expensesElement = document.getElementById('expenses')
-        this.expensesTextElement = document.getElementById('expenses-text')
+        this.expensesElement = document.getElementById('expenses');
+        this.expensesTextElement = document.getElementById('expenses-text');
 
-        this.sidebarCategoryElement = document.getElementById('sidebar-category')
-        this.categoryButtonElement = document.getElementById('category-button')
-        this.orderCollapseElement = document.getElementById('orders-collapse')
-        this.categorySvgElement = document.getElementById('category-svg')
+        this.sidebarCategoryElement = document.getElementById('sidebar-category');
+        this.categoryButtonElement = document.getElementById('category-button');
+        this.orderCollapseElement = document.getElementById('orders-collapse');
+        this.categorySvgElement = document.getElementById('category-svg');
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
 
-        this.buttonElements = document.querySelectorAll('.button-element')
-        this.collapseButtonElements = document.querySelectorAll('.collapse-button')
-        this.svgElements = document.querySelectorAll('.svg-element')
+        this.buttonElements = document.querySelectorAll('.button-element');
+        this.collapseButtonElements = document.querySelectorAll('.collapse-button');
+        this.svgElements = document.querySelectorAll('.svg-element');
 
-        this.sidebarFinance = document.getElementById('sidebar-finance')
-        this.sidebarFinanceText = document.getElementById('sidebar-finance-text')
-        this.sidebarFinanceSvg = document.getElementById('sidebar-finance-svg')
+        this.sidebarFinance = document.getElementById('sidebar-finance');
+        this.sidebarFinanceText = document.getElementById('sidebar-finance-text');
+        this.sidebarFinanceSvg = document.getElementById('sidebar-finance-svg');
 
         this.sidebarMain = document.getElementById('sidebar-main');
         this.sidebarMainText = document.getElementById('sidebar-main-text');
         this.ssidebarMainSvg = document.getElementById('sidebar-main-svg');
 
-        this.editBtnElements = document.querySelectorAll('.edit-btn-income')
-
-        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
-        this.popupIncome = document.getElementById('popup-income')
+        this.popupIncome = document.getElementById('popup-income');
 
 
         this.removeElement()
         this.inactive()
         this.activeElement()
-        this.deleteBtn()
-        this.editBtnActive()
+        this.init()
 
         this.quiz = null
         this.quizName = null
@@ -90,8 +85,6 @@ export class Income {
             deleteBtn.className = 'delete-btn btn btn-danger';
             deleteBtn.innerText = 'Удалить';
 
-
-
             categoryItemActive.appendChild(editBtnIncome)
             categoryItemActive.appendChild(deleteBtn)
 
@@ -99,12 +92,29 @@ export class Income {
             categoryItem.appendChild(categoryItemActive)
             categoryItems.appendChild(categoryItem)
         })
+
         const categoryItemAdd = document.createElement('a');
         categoryItemAdd.className = 'category-item category-item-add d-flex justify-content-center align-items-center';
         categoryItemAdd.setAttribute('href', '#/createCategoryIncome');
         categoryItemAdd.innerText = '+';
 
         categoryItems.appendChild(categoryItemAdd)
+
+        this.editBtnElements = document.querySelectorAll('.edit-btn-income')
+        this.editBtnElements.forEach(item => {
+            item.onclick = function () {
+                const result = item.parentElement.previousElementSibling.textContent
+                localStorage.setItem('BlockName', JSON.stringify(result))
+            }
+        })
+
+        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+        const that = this
+        this.deleteBtnElement.forEach(item => {
+            item.onclick = function () {
+                that.popupIncome.style.display = 'grid'
+            }
+        })
     }
 
     removeElement() {
@@ -160,26 +170,4 @@ export class Income {
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
     }
-
-    editBtnActive() {
-        console.log(this.editBtnElements)
-        this.editBtnElements.forEach(item => {
-            item.onclick = function () {
-                console.log(item)
-                const result = item.parentElement.previousElementSibling.textContent
-                localStorage.setItem('BlockName', JSON.stringify(result))
-            }
-        })
-    }
-
-    deleteBtn() {
-        const that = this
-        this.deleteBtnElement.forEach(item => {
-            item.onclick = function () {
-                that.popupIncome.style.display = 'grid'
-            }
-        })
-    }
-
-
 }

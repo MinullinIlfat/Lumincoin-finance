@@ -10,7 +10,7 @@ export class EditCategoryIncome {
     addInputNameIncome() {
         let result = localStorage.getItem('BlockName')
         JSON.parse(result)
-        result = result.replace(/[^а-яё]/gi, '');
+        result = result.replace(/[^а-яё]/gi, ' ');
         this.inputNameElement.placeholder = result
     }
 

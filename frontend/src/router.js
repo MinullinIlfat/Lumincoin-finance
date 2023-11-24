@@ -8,6 +8,7 @@ import {EditCategoryIncome} from "./components/editCategoryIncome.js";
 import {EditCategoryExpenses} from "./components/editCategoryExpenses.js";
 import {CreateCategoryIncome} from "./components/createCategoryIncome.js";
 import {CreateCategoryExpenses} from "./components/createCategoryExpenses.js";
+import {EditIncomeOrExpenses} from "./components/editIncomeOrExpenses.js";
 
 export class Router {
 
@@ -78,7 +79,7 @@ export class Router {
                 template: 'templates/editIncomeOrExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new EditIncomeOrExpenses()
                 }
             },
             {

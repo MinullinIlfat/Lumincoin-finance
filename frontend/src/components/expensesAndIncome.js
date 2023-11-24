@@ -24,11 +24,10 @@ export class ExpensesAndIncome {
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
 
         this.popupExpAndInc = document.getElementById('popup-expense-and-income')
-        this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+        this.popupDeleteOperation = document.getElementById('popup-delete-operation')
 
         this.removeElement()
         this.inactive()
-        this.deleteBtn()
         this.activeElement()
         this.init()
     }
@@ -88,20 +87,12 @@ export class ExpensesAndIncome {
         this.ssidebarMainSvg.style.fill = 'black';
     }
 
-    deleteBtn() {
-        const that = this
-        this.deleteBtnElement.forEach(item => {
-            item.onclick = function () {
-                that.popupExpAndInc.style.display = 'grid'
-            }
-        })
-    }
-
     showTableElements(result) {
+        const that = this
+
         this.tableBody = document.getElementById('table-body');
 
         result.forEach(item => {
-            console.log(item)
 
             const tableItem = document.createElement('tr');
             tableItem.setAttribute('id', item.id);
@@ -126,10 +117,13 @@ export class ExpensesAndIncome {
             tableItemCategory.innerText = item.category;
 
             const tableItemAmount = document.createElement('td');
-            tableItemAmount.innerText = item.amount;
+            tableItemAmount.innerText = item.amount + '$';
 
+            let str = item.date;
+            let arr = str.split('-');
+            let res = arr[2] + '.' + arr[1] + '.' + arr[0];
             const tableItemDate = document.createElement('td');
-            tableItemDate.innerText = item.date;
+            tableItemDate.innerText = res;
 
             const tableItemComment = document.createElement('td');
             tableItemComment.innerText = item.comment;
@@ -148,6 +142,7 @@ export class ExpensesAndIncome {
 
             const tableItemButtonCreate = document.createElement('a');
             tableItemButtonCreate.setAttribute('href', '#/editIncomeOrExpenses');
+            tableItemButtonCreate.className = 'edit-operation';
             const tableItemButtonCreateImg = document.createElement("img");
             tableItemButtonCreateImg.src = "images/iconPen.png";
 
@@ -166,6 +161,42 @@ export class ExpensesAndIncome {
             tableItem.appendChild(tableItemButton)
 
             this.tableBody.appendChild(tableItem)
+
+            this.editOperationElements = document.querySelectorAll('.edit-operation')
+            this.editOperationElements.forEach(item => {
+                item.onclick = function () {
+                    const type = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+                    const category = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+                    const amount = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+                    const date = item.parentElement.previousElementSibling.previousElementSibling.textContent
+                    const comment = item.parentElement.previousElementSibling.textContent
+                    const operationId = item.parentElement.parentElement.id
+                    localStorage.setItem('Type', JSON.stringify(type))
+                    localStorage.setItem('Category', JSON.stringify(category))
+                    localStorage.setItem('Amount', JSON.stringify(amount))
+                    localStorage.setItem('Date', JSON.stringify(date))
+                    localStorage.setItem('Comment', JSON.stringify(comment))
+                    localStorage.setItem('OperationId', JSON.stringify(operationId))
+                }
+            })
+
+            this.deleteBtnElement = document.querySelectorAll('.delete-btn')
+            this.deleteBtnElement.forEach(item => {
+                item.onclick = function () {
+                    that.popupExpAndInc.style.display = 'grid'
+                    that.popupDeleteOperation.onclick = function () {
+                        let resultId = item.parentElement.parentElement.id
+                        try {
+                            const result = CustomHttp.request(config.host + '/operations/' + resultId, "DELETE");
+                            if (result) {
+                                location.href = '#/expensesAndIncome'
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                }
+            })
 
         })
     }

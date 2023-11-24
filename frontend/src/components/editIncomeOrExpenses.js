@@ -73,16 +73,16 @@ export class EditIncomeOrExpenses {
             if (!userInfo) {
                 location.href = '#/login'
             }
-            let arr = that.createDateOperation.value.split('-');
-            let res = arr[2] + '.' + arr[1] + '.' + arr[0];
-            console.log(res)
+            // let arr = that.createDateOperation.value.split('-');
+            // let res = arr[2] + '.' + arr[1] + '.' + arr[0];
+            // console.log(res)
 
             try {
                 const result = CustomHttp.request(config.host + '/operations/' + operationId, "PUT", {
                     type: that.createTypeOperation.value,
                     category: that.createCategoryOperation.value,
                     amount: that.createAmountOperation.value,
-                    date: res,
+                    date: that.createDateOperation.value,
                     comment: that.createCommentOperation.value
                 });
                 if (result) {

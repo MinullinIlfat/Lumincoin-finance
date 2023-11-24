@@ -21,16 +21,45 @@ export class EditIncomeOrExpenses {
         let amount = localStorage.getItem('Amount')
         let date = localStorage.getItem('Date')
         let comment = localStorage.getItem('Comment')
-        type = type.replace(/[^а-яё]/gi, ' ');
-        category = category.replace(/[^а-яё]/gi, ' ');
+        type = type.replace(/[^а-яёa-z]/gi, ' ');
+        category = category.replace(/[^а-яёa-z]/gi, ' ');
         amount = amount.replace(/[^0-9,.$]/gi, ' ');
         date = date.replace(/[^0-9,.]/gi, ' ');
-        comment = comment.replace(/[^а-яё]/gi, ' ');
+        comment = comment.replace(/[^а-яёa-z]/gi, ' ');
         this.createTypeOperation.placeholder = type
         this.createCategoryOperation.placeholder = category
         this.createAmountOperation.placeholder = amount
         this.createDateOperation.placeholder = date
         this.createCommentOperation.placeholder = comment
+        this.inputMask()
+    }
+
+    inputMask() {
+        let dateInputMask = function dateInputMask(elm) {
+            elm.addEventListener('keypress', function(e) {
+                if(e.keyCode < 47 || e.keyCode > 57) {
+                    e.preventDefault();
+                }
+
+                let len = elm.value.length;
+
+                if(len !== 1 || len !== 3) {
+                    if(e.keyCode == 47) {
+                        e.preventDefault();
+                    }
+                }
+
+                if(len === 2) {
+                    elm.value += '-';
+                }
+
+                if(len === 5) {
+                    elm.value += '-';
+                }
+            });
+        };
+
+        dateInputMask(this.createDateOperation);
     }
 
     editOperation() {
@@ -44,13 +73,16 @@ export class EditIncomeOrExpenses {
             if (!userInfo) {
                 location.href = '#/login'
             }
+            let arr = that.createDateOperation.value.split('-');
+            let res = arr[2] + '.' + arr[1] + '.' + arr[0];
+            console.log(res)
 
             try {
                 const result = CustomHttp.request(config.host + '/operations/' + operationId, "PUT", {
                     type: that.createTypeOperation.value,
                     category: that.createCategoryOperation.value,
                     amount: that.createAmountOperation.value,
-                    date: that.createDateOperation.value,
+                    date: res,
                     comment: that.createCommentOperation.value
                 });
                 if (result) {

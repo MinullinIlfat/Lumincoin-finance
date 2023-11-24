@@ -93,7 +93,6 @@ export class ExpensesAndIncome {
         this.tableBody = document.getElementById('table-body');
 
         result.forEach(item => {
-
             const tableItem = document.createElement('tr');
             tableItem.setAttribute('id', item.id);
 
@@ -120,8 +119,11 @@ export class ExpensesAndIncome {
             tableItemAmount.innerText = item.amount + '$';
 
             let str = item.date;
+            // console.log(str)
             let arr = str.split('-');
+            // console.log(arr)
             let res = arr[2] + '.' + arr[1] + '.' + arr[0];
+            // console.log(res)
             const tableItemDate = document.createElement('td');
             tableItemDate.innerText = res;
 

@@ -12,11 +12,49 @@ export class CreateIncomeOrExpenses {
         this.saveNewCreateOperation = document.getElementById('save-new-create-operation');
 
 
+        this.incomeCategories();
         this.createNewOperation();
     }
 
+    async incomeCategories() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const result = await CustomHttp.request(config.host + '/categories/income');
+            if (result) {
+                this.selectCategories(result)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    selectCategories(result) {
+        result.forEach(item => {
+            const option = document.createElement('option')
+            option.setAttribute('value', item.title);
+            option.setAttribute('id', item.id);
+            option.className = 'option-element';
+            option.innerText = item.title
+
+            this.newCreateCategoryOperation.appendChild(option)
+        })
+    }
 
     createNewOperation() {
+        let optionId = null
+        this.newCreateCategoryOperation.addEventListener('change', (e) => {
+            let option = document.querySelectorAll('.option-element')
+            option.forEach(item => {
+                console.log(item.id);
+                optionId = item.id
+                return optionId;
+            })
+            console.log(optionId)
+        })
+        console.log(this.newCreateCategoryOperation.value)
         const that = this
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
@@ -32,11 +70,7 @@ export class CreateIncomeOrExpenses {
                     date: that.newCreateDateOperation.value,
                     comment: that.newCreateCommentOperation.value
                 });
-                console.log(that.newCreateTypeOperation.value)
-                console.log(that.newCreateCategoryOperation.value)
-                console.log(that.newCreateAmountOperation.value)
-                console.log(that.newCreateDateOperation.value)
-                console.log(that.newCreateCommentOperation.value)
+
                 if (result) {
                     location.href = '#/expensesAndIncome'
                 }

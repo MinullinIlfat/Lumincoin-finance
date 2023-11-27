@@ -13,7 +13,6 @@ export class CreateIncomeOrExpenses {
 
 
         this.incomeCategories();
-        this.createNewOperation();
     }
 
     async incomeCategories() {
@@ -25,6 +24,7 @@ export class CreateIncomeOrExpenses {
             const result = await CustomHttp.request(config.host + '/categories/income');
             if (result) {
                 this.selectCategories(result)
+                this.createNewOperation(result)
             }
         } catch (error) {
             console.log(error);
@@ -43,18 +43,16 @@ export class CreateIncomeOrExpenses {
         })
     }
 
-    createNewOperation() {
-        let optionId = null
+    createNewOperation(result) {
+        let category = null
         this.newCreateCategoryOperation.addEventListener('change', (e) => {
-            let option = document.querySelectorAll('.option-element')
-            option.forEach(item => {
-                console.log(item.id);
-                optionId = item.id
-                return optionId;
+            result.forEach(item => {
+                if (this.newCreateCategoryOperation.value === item.title) {
+                    category = item.id
+                }
             })
-            console.log(optionId)
         })
-        console.log(this.newCreateCategoryOperation.value)
+
         const that = this
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
@@ -65,7 +63,7 @@ export class CreateIncomeOrExpenses {
             try {
                 const result = CustomHttp.request(config.host + '/operations', "POST", {
                     type: that.newCreateTypeOperation.value,
-                    category: that.newCreateCategoryOperation.value,
+                    category_id: category,
                     amount: that.newCreateAmountOperation.value,
                     date: that.newCreateDateOperation.value,
                     comment: that.newCreateCommentOperation.value

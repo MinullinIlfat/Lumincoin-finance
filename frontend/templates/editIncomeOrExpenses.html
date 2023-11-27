@@ -2,12 +2,13 @@
     <h1 class="title">Редактирование дохода/расхода</h1>
     <div class="create">
         <select name="language" class="mb-2" id="create-type-operation">
+            <option selected value=""></option>
             <option id="one" value="доход">доход</option>
             <option id="two" value="расход">расход</option>
         </select>
         <input type="text" id="create-category-operation" placeholder="Зарплата" class="mb-2">
         <input type="number" id="create-amount-operation" placeholder="500$" class="mb-2">
-        <input type="date" id="create-date-operation" value="1111-01-01" class="mb-2">
+        <input type="date" value="" id="create-date-operation" class="mb-2">
         <input type="text" id="create-comment-operation" placeholder="Комментарий..." class="mb-2">
         <div class="create-active mt-3">
             <a id="create-operation-save-btn" href="#/expensesAndIncome" class="btn btn-success me-2">Сохранить</a>

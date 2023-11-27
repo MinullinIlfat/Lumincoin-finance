@@ -87,6 +87,10 @@ export class ExpensesAndIncome {
         this.ssidebarMainSvg.style.fill = 'black';
     }
 
+    // removeTable() {
+    //     const tableItem = document.querySelectorAll('tr');
+    //     this.tableItem.remove()
+    // }
     showTableElements(result) {
         const that = this
 
@@ -102,10 +106,10 @@ export class ExpensesAndIncome {
 
             const tableItemType = document.createElement('td');
             tableItemType.className = 'row-name-green';
-            if (item.type === 'income') {
+            if (item.type === 'income' || item.type === 'доход') {
                 item.type = 'доход'
                 tableItemType.className = 'row-name-green';
-            } else if (item.type === 'expense') {
+            } else if (item.type === 'expense' || item.type === 'расход') {
                 item.type = 'расход'
                 tableItemType.className = 'row-name-red';
             }
@@ -119,11 +123,9 @@ export class ExpensesAndIncome {
             tableItemAmount.innerText = item.amount + '$';
 
             let str = item.date;
-            // console.log(str)
             let arr = str.split('-');
-            // console.log(arr)
             let res = arr[2] + '.' + arr[1] + '.' + arr[0];
-            // console.log(res)
+
             const tableItemDate = document.createElement('td');
             tableItemDate.innerText = res;
 

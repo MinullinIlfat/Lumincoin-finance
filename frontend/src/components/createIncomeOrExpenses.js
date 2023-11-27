@@ -15,17 +15,14 @@ export class CreateIncomeOrExpenses {
         this.createNewOperation();
     }
 
+
     createNewOperation() {
         const that = this
-
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {
                 location.href = '#/login'
             }
-            // let arr = that.createDateOperation.value.split('-');
-            // let res = arr[2] + '.' + arr[1] + '.' + arr[0];
-            // console.log(res)
 
             try {
                 const result = CustomHttp.request(config.host + '/operations', "POST", {
@@ -35,6 +32,11 @@ export class CreateIncomeOrExpenses {
                     date: that.newCreateDateOperation.value,
                     comment: that.newCreateCommentOperation.value
                 });
+                console.log(that.newCreateTypeOperation.value)
+                console.log(that.newCreateCategoryOperation.value)
+                console.log(that.newCreateAmountOperation.value)
+                console.log(that.newCreateDateOperation.value)
+                console.log(that.newCreateCommentOperation.value)
                 if (result) {
                     location.href = '#/expensesAndIncome'
                 }

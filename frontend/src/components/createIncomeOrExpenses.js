@@ -13,6 +13,7 @@ export class CreateIncomeOrExpenses {
 
 
         this.incomeCategories();
+        this.expenseCategories();
     }
 
     async incomeCategories() {
@@ -23,7 +24,7 @@ export class CreateIncomeOrExpenses {
         try {
             const result = await CustomHttp.request(config.host + '/categories/income');
             if (result) {
-                this.selectCategories(result)
+                this.selectCategoriesIncome(result)
                 this.createNewOperation(result)
             }
         } catch (error) {
@@ -31,13 +32,40 @@ export class CreateIncomeOrExpenses {
         }
     }
 
-    selectCategories(result) {
+    async expenseCategories() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
+            if (resultExpense) {
+                this.selectCategoriesExpense(resultExpense)
+                this.createNewOperation(resultExpense)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    selectCategoriesIncome(result) {
         result.forEach(item => {
             const option = document.createElement('option')
             option.setAttribute('value', item.title);
             option.setAttribute('id', item.id);
             option.className = 'option-element';
             option.innerText = item.title
+
+            this.newCreateCategoryOperation.appendChild(option)
+        })
+    }
+    selectCategoriesExpense(resultExpense) {
+        resultExpense.forEach(itemExp => {
+            const option = document.createElement('option')
+            option.setAttribute('value', itemExp.title);
+            option.setAttribute('id', itemExp.id);
+            option.className = 'option-element';
+            option.innerText = itemExp.title
 
             this.newCreateCategoryOperation.appendChild(option)
         })

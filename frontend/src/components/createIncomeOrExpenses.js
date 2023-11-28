@@ -55,39 +55,69 @@ export class CreateIncomeOrExpenses {
             option.setAttribute('id', item.id);
             option.className = 'option-element';
             option.innerText = item.title
+            option.style.display = 'none'
 
             this.newCreateCategoryOperation.appendChild(option)
+
+            this.newCreateTypeOperation.addEventListener('change', (e) => {
+                if (this.newCreateTypeOperation.value === 'expense') {
+                    option.style.display = 'none'
+                    this.newCreateCategoryOperation.value = ' '
+                } else {
+                    option.style.display = 'block'
+                }
+            })
         })
     }
     selectCategoriesExpense(resultExpense) {
         resultExpense.forEach(itemExp => {
-            const option = document.createElement('option')
-            option.setAttribute('value', itemExp.title);
-            option.setAttribute('id', itemExp.id);
-            option.className = 'option-element';
-            option.innerText = itemExp.title
+            const optionExp = document.createElement('option')
+            optionExp.setAttribute('value', itemExp.title);
+            optionExp.setAttribute('id', itemExp.id);
+            optionExp.className = 'option-element-exp';
+            optionExp.innerText = itemExp.title
+            optionExp.style.display = 'none'
 
-            this.newCreateCategoryOperation.appendChild(option)
+            this.newCreateCategoryOperation.appendChild(optionExp)
+
+            this.newCreateTypeOperation.addEventListener('change', (e) => {
+
+                if (this.newCreateTypeOperation.value === 'income') {
+                    optionExp.style.display = 'none'
+                } else {
+                    optionExp.style.display = 'block'
+                }
+            })
         })
     }
 
     createNewOperation(result) {
+        const that = this
         let category = null
         this.newCreateCategoryOperation.addEventListener('change', (e) => {
+            // console.log(result)
+
+            // console.log(this.newCreateCategoryOperation.value)
+            // category = result.find(function (item) {
+            //     if (item.title === that.newCreateCategoryOperation.value) {
+            //         return item.id
+            //     }
+            // })
             result.forEach(item => {
                 if (this.newCreateCategoryOperation.value === item.title) {
                     category = item.id
+                    return category
                 }
             })
+            console.log(category)
         })
 
-        const that = this
+
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {
                 location.href = '#/login'
             }
-
             try {
                 const result = CustomHttp.request(config.host + '/operations', "POST", {
                     type: that.newCreateTypeOperation.value,
@@ -98,7 +128,7 @@ export class CreateIncomeOrExpenses {
                 });
 
                 if (result) {
-                    location.href = '#/expensesAndIncome'
+                    location.href = '#/IncomeAndExpense'
                 }
             } catch (error) {
                 console.log(error);

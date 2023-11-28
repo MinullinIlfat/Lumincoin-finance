@@ -168,7 +168,17 @@ input[type="number"]:focus {
     margin-bottom: 40px;
 }
 
+/*.icon-svg {*/
+/*    width: 75px;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
 .button:hover, .button:active, .button:visited, .button:focus, .button:focus-visible {
+    background: #6C757D !important;
+    color: #FFFFFF !important;
+}
+
+.button.active {
     background: #6C757D !important;
     color: #FFFFFF !important;
 }

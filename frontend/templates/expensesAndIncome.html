@@ -7,28 +7,28 @@
     <div class="menu">
         <ul class="d-flex align-items-center p-0">
             <li>
-                <button class="button">Сегодня</button>
+                <button id="button-today" class="button active">Сегодня</button>
             </li>
             <li>
-                <button class="button">Неделя</button>
+                <button id="button-week" class="button">Неделя</button>
             </li>
             <li>
-                <button class="button">Месяц</button>
+                <button id="button-month" class="button">Месяц</button>
             </li>
             <li>
-                <button class="button">Год</button>
+                <button id="button-year" class="button">Год</button>
             </li>
             <li>
-                <button class="button">Все</button>
+                <button id="button-all" class="button">Все</button>
             </li>
             <li>
-                <button class="button">Интервал</button>
+                <button id="button-interval" class="button">Интервал</button>
             </li>
             <li class="menu-date">
-                с <a href="#">Дата</a>
+                с <input id="button-interval-from" type="date">
             </li>
             <li class="menu-date">
-                по <a href="#">Дата</a>
+                по <input id="button-interval-to" type="date">
             </li>
         </ul>
     </div>
@@ -41,7 +41,7 @@
             <th class="p-3">Сумма</th>
             <th class="p-3">Дата</th>
             <th class="p-3">Комментарий</th>
-            <th class="p-3"></th>
+            <th class="p-3 icon-svg"></th>
         </tr>
         </thead>
         <tbody id="table-body">

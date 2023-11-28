@@ -26,25 +26,82 @@ export class ExpensesAndIncome {
         this.popupExpAndInc = document.getElementById('popup-expense-and-income')
         this.popupDeleteOperation = document.getElementById('popup-delete-operation')
 
+        this.buttonAll = document.getElementById('button-all')
+        this.buttonWeek = document.getElementById('button-week')
+        this.buttonMonth = document.getElementById('button-month')
+        this.buttonYear = document.getElementById('button-year')
+        this.buttonToday = document.getElementById('button-today')
+        this.buttonInterval = document.getElementById('button-interval')
+        this.buttonIntervalFrom = document.getElementById('button-interval-from"')
+        this.buttonIntervalTo = document.getElementById('button-interval-to"')
+
+        this.btns = document.querySelectorAll('.button')
+
         this.removeElement()
         this.inactive()
         this.activeElement()
         this.init()
     }
 
+
     async init() {
+        const that = this
         const userInfo = Auth.getUserInfo();
         if (!userInfo) {
             location.href = '#/login'
         }
-        try {
-            const result = await CustomHttp.request(config.host + '/operations/?period=all');
-            if (result) {
-                this.showTableElements(result)
+        this.buttonAll.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=all');
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
+        this.buttonWeek.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=week');
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonMonth.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=month');
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonYear.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=year');
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonToday.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=today');
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
     }
 
     removeElement() {
@@ -87,18 +144,26 @@ export class ExpensesAndIncome {
         this.ssidebarMainSvg.style.fill = 'black';
     }
 
-    // removeTable() {
-    //     const tableItem = document.querySelectorAll('tr');
-    //     this.tableItem.remove()
-    // }
     showTableElements(result) {
         const that = this
 
         this.tableBody = document.getElementById('table-body');
-
         result.forEach(item => {
+            for (let i = 0; i < this.btns.length; i++) {
+                this.btns[i].addEventListener("click", function() {
+                    let current = document.getElementsByClassName("button active");
+                    current[0].className = current[0].className.replace(" active", " ");
+                    this.className += " active";
+                    let tableItem = document.getElementById(item.id);
+                    if (tableItem) {
+                        tableItem.remove()
+                    }
+                });
+            }
+
             const tableItem = document.createElement('tr');
             tableItem.setAttribute('id', item.id);
+            tableItem.className = 'tr-item';
 
             const tableItemScope = document.createElement('th');
             tableItemScope.setAttribute('scope', 'row');
@@ -204,4 +269,6 @@ export class ExpensesAndIncome {
 
         })
     }
+
+
 }

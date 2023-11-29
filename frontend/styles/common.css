@@ -138,7 +138,7 @@ input[type="number"]:focus {
 /**/
 
 .menu {
-    margin-bottom: 140px;
+    margin-bottom: 40px;
 }
 
 .menu ul li {
@@ -194,6 +194,10 @@ input[type="number"]:focus {
 
 .menu-date a {
     margin-left: 9px;
+}
+
+.menu-date input {
+    border: 0
 }
 
 .table  a {

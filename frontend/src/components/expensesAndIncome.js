@@ -100,9 +100,22 @@ export class ExpensesAndIncome {
                 console.log(error);
             }
         }
+        this.buttonToday.click()
 
-
+        $(function () {
+            $("#datetimepicker7").datetimepicker();
+            $("#datetimepicker8").datetimepicker({
+                useCurrent: false
+            });
+            $("#datetimepicker7").on("dp.change", function (e) {
+                $('#datetimepicker8').data("DateTimePicker").minDate(e.date);
+            });
+            $("#datetimepicker8").on("dp.change", function (e) {
+                $('#datetimepicker7').data("DateTimePicker").maxDate(e.date);
+            });
+        });
     }
+
 
     removeElement() {
         this.buttonElements.forEach(item => {
@@ -150,9 +163,9 @@ export class ExpensesAndIncome {
         this.tableBody = document.getElementById('table-body');
         result.forEach(item => {
             for (let i = 0; i < this.btns.length; i++) {
-                this.btns[i].addEventListener("click", function() {
+                this.btns[i].addEventListener("click", function () {
                     let current = document.getElementsByClassName("button active");
-                    current[0].className = current[0].className.replace(" active", " ");
+                    current[0].className = current[0].className.replace(" active", "");
                     this.className += " active";
                     let tableItem = document.getElementById(item.id);
                     if (tableItem) {

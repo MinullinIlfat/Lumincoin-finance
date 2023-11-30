@@ -94,6 +94,12 @@ export class CreateIncomeOrExpenses {
     createNewOperation(result) {
         const that = this
         let category = null
+        // let res2 = []
+        // let res1 = result.forEach(item => {
+        //     res2.push(item.split)
+        //
+        // })
+        // console.log(res2)
         this.newCreateCategoryOperation.addEventListener('change', (e) => {
             // console.log(result)
 
@@ -103,8 +109,9 @@ export class CreateIncomeOrExpenses {
             //         return item.id
             //     }
             // })
+            // console.log(res1)
             result.forEach(item => {
-                if (this.newCreateCategoryOperation.value === item.title) {
+                if (item.title && this.newCreateCategoryOperation.value === item.title) {
                     category = item.id
                     return category
                 }

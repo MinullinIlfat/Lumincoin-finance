@@ -32,8 +32,8 @@ export class ExpensesAndIncome {
         this.buttonYear = document.getElementById('button-year')
         this.buttonToday = document.getElementById('button-today')
         this.buttonInterval = document.getElementById('button-interval')
-        this.buttonIntervalFrom = document.getElementById('button-interval-from"')
-        this.buttonIntervalTo = document.getElementById('button-interval-to"')
+        this.buttonIntervalFrom = document.getElementById('from')
+        this.buttonIntervalTo = document.getElementById('to')
 
         this.btns = document.querySelectorAll('.button')
 
@@ -102,18 +102,49 @@ export class ExpensesAndIncome {
         }
         this.buttonToday.click()
 
-        $(function () {
-            $("#datetimepicker7").datetimepicker();
-            $("#datetimepicker8").datetimepicker({
-                useCurrent: false
-            });
-            $("#datetimepicker7").on("dp.change", function (e) {
-                $('#datetimepicker8').data("DateTimePicker").minDate(e.date);
-            });
-            $("#datetimepicker8").on("dp.change", function (e) {
-                $('#datetimepicker7').data("DateTimePicker").maxDate(e.date);
-            });
-        });
+
+        this.buttonInterval.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' +this.buttonIntervalTo.value);
+                if (result) {
+                    that.showTableElements(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        $( function() {
+            var dateFormat = "mm/dd/yy",
+                from = $( "#from" )
+                    .datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 1
+                    })
+                    .on( "change", function() {
+                        to.datepicker( "option", "minDate", getDate( this ) );
+                    }),
+                to = $( "#to" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1
+                })
+                    .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    });
+
+            function getDate( element ) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+
+                return date;
+            }
+        } );
     }
 
 

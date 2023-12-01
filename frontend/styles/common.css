@@ -168,10 +168,20 @@ input[type="number"]:focus {
     margin-bottom: 40px;
 }
 
-/*.icon-svg {*/
-/*    width: 75px;*/
-/*    box-sizing: border-box;*/
-/*}*/
+.menu label {
+    margin-right: 9px;
+}
+
+.menu input {
+    margin-right: 27px;
+    border: 0;
+    width: 85px;
+    color: #6C757D;
+    font-size: 16px;
+    line-height: 19px;
+    padding: 9px 0;
+}
+
 
 .button:hover, .button:active, .button:visited, .button:focus, .button:focus-visible {
     background: #6C757D !important;
@@ -226,6 +236,7 @@ input[type="number"]:focus {
 .charts {
     display: flex;
     justify-content: center;
+    margin-top: 140px;
 }
 
 .charts span {

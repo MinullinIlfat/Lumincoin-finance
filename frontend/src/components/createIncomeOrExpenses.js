@@ -69,6 +69,7 @@ export class CreateIncomeOrExpenses {
             })
         })
     }
+
     selectCategoriesExpense(resultExpense) {
         resultExpense.forEach(itemExp => {
             const optionExp = document.createElement('option')
@@ -93,31 +94,25 @@ export class CreateIncomeOrExpenses {
 
     createNewOperation(result) {
         const that = this
-        let category = null
-        // let res2 = []
-        // let res1 = result.forEach(item => {
-        //     res2.push(item.split)
-        //
-        // })
-        // console.log(res2)
-        this.newCreateCategoryOperation.addEventListener('change', (e) => {
-            // console.log(result)
+        let testCategory
+        let category
 
-            // console.log(this.newCreateCategoryOperation.value)
-            // category = result.find(function (item) {
-            //     if (item.title === that.newCreateCategoryOperation.value) {
-            //         return item.id
-            //     }
-            // })
-            // console.log(res1)
+        this.newCreateCategoryOperation.addEventListener('change', (e) => {
             result.forEach(item => {
                 if (item.title && this.newCreateCategoryOperation.value === item.title) {
-                    category = item.id
-                    return category
+                    testCategory = item.id
+
                 }
             })
-            console.log(category)
+            if (testCategory) {
+                // console.log(testCategory)
+                category = testCategory
+                // console.log(category)
+            }
+            // console.log(category)
         })
+
+
 
 
         this.saveNewCreateOperation.onclick = function () {
@@ -126,6 +121,7 @@ export class CreateIncomeOrExpenses {
                 location.href = '#/login'
             }
             try {
+                // console.log(category)
                 const result = CustomHttp.request(config.host + '/operations', "POST", {
                     type: that.newCreateTypeOperation.value,
                     category_id: category,

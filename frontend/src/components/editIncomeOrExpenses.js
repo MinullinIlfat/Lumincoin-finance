@@ -32,10 +32,10 @@ export class EditIncomeOrExpenses {
         comment = comment.replace(/[^а-яёa-z1-9]/gi, ' ');
         comment = comment.replace(/\s+/g, ' ').trim();
 
-        if (this.createTypeOperation.value !== type) {
-            this.createTypeOperation.lastElementChild.setAttribute("selected", "selected")
-        }
-
+        // if (this.createTypeOperation.value !== type) {
+        //     this.createTypeOperation.firstElementChild.setAttribute("selected", "selected")
+        // }
+        this.createTypeOperation.value = type
         this.createCategoryOperation.value = category
         this.createAmountOperation.value = amount
         this.createDateOperation.value = date

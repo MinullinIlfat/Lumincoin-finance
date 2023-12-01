@@ -105,7 +105,7 @@ export class ExpensesAndIncome {
 
         this.buttonInterval.onclick = async function () {
             try {
-                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' +this.buttonIntervalTo.value);
+                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' + this.buttonIntervalTo.value);
                 if (result) {
                     that.showTableElements(result)
                 }

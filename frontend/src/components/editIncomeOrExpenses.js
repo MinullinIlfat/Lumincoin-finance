@@ -59,11 +59,11 @@ export class EditIncomeOrExpenses {
     //             }
     //
     //             if(len === 2) {
-    //                 elm.value += '-';
+    //                 elm.value += '.';
     //             }
     //
     //             if(len === 5) {
-    //                 elm.value += '-';
+    //                 elm.value += '.';
     //             }
     //         });
     //     };

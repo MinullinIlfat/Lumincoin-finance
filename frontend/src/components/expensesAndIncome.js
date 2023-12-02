@@ -167,6 +167,14 @@ export class ExpensesAndIncome {
         this.sidebarFinanceText.classList.add('nav-link', 'active')
         this.sidebarFinanceText.classList.remove('link-dark')
         this.sidebarFinanceSvg.style.fill = 'white'
+
+        for (let i = 0; i < this.btns.length; i++) {
+            this.btns[i].addEventListener("click", function () {
+                let current = document.getElementsByClassName("button active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
     }
 
     inactive() {
@@ -193,16 +201,10 @@ export class ExpensesAndIncome {
 
         this.tableBody = document.getElementById('table-body');
         result.forEach(item => {
-            for (let i = 0; i < this.btns.length; i++) {
-                this.btns[i].addEventListener("click", function () {
-                    let current = document.getElementsByClassName("button active");
-                    current[0].className = current[0].className.replace(" active", "");
-                    this.className += " active";
-                    let tableItem = document.getElementById(item.id);
-                    if (tableItem) {
-                        tableItem.remove()
-                    }
-                });
+
+            let tableItems = document.getElementById(item.id);
+            if (tableItems) {
+                tableItems.remove()
             }
 
             const tableItem = document.createElement('tr');

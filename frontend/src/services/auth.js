@@ -7,8 +7,9 @@ export class Auth {
 
     static async processUnauthorizedResponse() {
         const refreshToken = localStorage.getItem(this.refreshTokenKey);
+        console.log(refreshToken)
         if (refreshToken) {
-            const response = await fetch(config.host + '/refresh', {
+            const response = await fetch('http://localhost:3000/api/refresh', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
@@ -19,7 +20,9 @@ export class Auth {
             if (response && response.status === 200) {
                 const result = await response.json();
                 if (result){
-                    this.setTokens(result.tokens.tokens.accessToken, result.tokens.tokens.refreshToken);
+                    this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
+                    // console.log(result.tokens.accessToken, 'accec')
+                    // console.log(result.tokens.refreshToken, 'refre')
                     return true;
                 }
             }

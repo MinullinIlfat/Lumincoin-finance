@@ -109,7 +109,7 @@ export class ExpensesAndIncome {
         this.buttonInterval.onclick = async function () {
 
             let from = that.buttonIntervalFrom.value.split('/')
-            
+
             let to = that.buttonIntervalTo.value.split('/')
             from = from[2] + '-' + from[0] + '-' + from[1]
             to = to[2] + '-' + to[0] + '-' + to[1]

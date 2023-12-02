@@ -11,11 +11,96 @@ export class EditIncomeOrExpenses {
         this.createCommentOperation = document.getElementById('create-comment-operation');
         this.createOperationSaveBtn = document.getElementById('create-operation-save-btn');
 
-        this.addInputNameOperations()
-        this.editOperation()
+        this.incomeCategories()
+        this.expenseCategories()
     }
 
-    addInputNameOperations() {
+    async incomeCategories() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const result = await CustomHttp.request(config.host + '/categories/income');
+            if (result) {
+                this.selectCategoriesIncome(result)
+                this.addInputNameOperations(result)
+                this.editOperation(result)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    selectCategoriesIncome(result) {
+        result.forEach(item => {
+            const option = document.createElement('option')
+            option.setAttribute('value', item.title);
+            option.setAttribute('id', item.id);
+            option.className = 'option-element';
+            option.innerText = item.title
+            if (this.createTypeOperation.value === 'income') {
+                option.style.display = 'block'
+            } else {
+                option.style.display = 'none'
+            }
+
+            this.createCategoryOperation.appendChild(option)
+
+            this.createTypeOperation.addEventListener('change', (e) => {
+                if (this.createTypeOperation.value === 'expense') {
+                    option.style.display = 'none'
+                } else {
+                    option.style.display = 'block'
+                }
+            })
+        })
+    }
+
+    async expenseCategories() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
+            if (resultExpense) {
+                this.selectCategoriesExpense(resultExpense)
+                this.addInputNameOperations(resultExpense)
+                this.editOperation(resultExpense)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    selectCategoriesExpense(resultExpense) {
+        resultExpense.forEach(itemExp => {
+            const optionExp = document.createElement('option')
+            optionExp.setAttribute('value', itemExp.title);
+            optionExp.setAttribute('id', itemExp.id);
+            optionExp.className = 'option-element-exp';
+            optionExp.innerText = itemExp.title
+            if (this.createTypeOperation.value === 'expense') {
+                optionExp.style.display = 'block'
+            }  else {
+                optionExp.style.display = 'none'
+            }
+
+            this.createCategoryOperation.appendChild(optionExp)
+
+            this.createTypeOperation.addEventListener('change', (e) => {
+
+                if (this.createTypeOperation.value === 'income') {
+                    optionExp.style.display = 'none'
+                } else {
+                    optionExp.style.display = 'block'
+                }
+            })
+        })
+    }
+
+    addInputNameOperations(result) {
         let type = localStorage.getItem('Type')
         let category = localStorage.getItem('Category')
         let amount = localStorage.getItem('Amount')
@@ -32,13 +117,22 @@ export class EditIncomeOrExpenses {
         comment = comment.replace(/[^а-яёa-z1-9]/gi, ' ');
         comment = comment.replace(/\s+/g, ' ').trim();
 
-        // if (this.createTypeOperation.value !== type) {
-        //     this.createTypeOperation.firstElementChild.setAttribute("selected", "selected")
-        // }
-        this.createTypeOperation.value = type
-        this.createCategoryOperation.value = category
+        // console.log(date)
+
+        result.forEach(item => {
+            if (item.title === category) {
+                this.createCategoryOperation.value = item.title
+            }
+        })
+
+        if (type === 'доход') {
+            this.createTypeOperation.value = 'income'
+        } else {
+            this.createTypeOperation.value = 'expense'
+        }
+
         this.createAmountOperation.value = amount
-        this.createDateOperation.value = date
+        // this.createDateOperation.value = date
         this.createCommentOperation.value = comment
         // this.inputMask()
     }
@@ -71,7 +165,13 @@ export class EditIncomeOrExpenses {
     //     dateInputMask(this.createDateOperation);
     // }
 
-    editOperation() {
+    editOperation(result) {
+        let category = null;
+        result.forEach(item => {
+            if (this.createCategoryOperation.value === item.title) {
+                category = item.id
+            }
+        })
         const that = this
         let operationId = localStorage.getItem('OperationId')
         JSON.parse(operationId)
@@ -86,7 +186,7 @@ export class EditIncomeOrExpenses {
             try {
                 const result = CustomHttp.request(config.host + '/operations/' + operationId, "PUT", {
                     type: that.createTypeOperation.value,
-                    category: that.createCategoryOperation.value,
+                    category_id: category,
                     amount: that.createAmountOperation.value,
                     date: that.createDateOperation.value,
                     comment: that.createCommentOperation.value

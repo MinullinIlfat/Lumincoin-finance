@@ -111,10 +111,6 @@ export class CreateIncomeOrExpenses {
             }
             // console.log(category)
         })
-
-
-
-
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {

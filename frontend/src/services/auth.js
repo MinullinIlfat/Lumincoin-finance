@@ -19,7 +19,7 @@ export class Auth {
             if (response && response.status === 200) {
                 const result = await response.json();
                 if (result){
-                    this.setTokens(result.accessToken, result.refreshToken);
+                    this.setTokens(result.tokens.tokens.accessToken, result.tokens.tokens.refreshToken);
                     return true;
                 }
             }

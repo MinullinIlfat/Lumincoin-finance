@@ -243,17 +243,18 @@ export class Main {
         this.sidebarMainText.classList.remove('link-dark');
         this.ssidebarMainSvg.style.fill = 'white';
 
+        for (let i = 0; i < this.btns.length; i++) {
+            this.btns[i].addEventListener("click", function () {
+                let current = document.getElementsByClassName("button active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+
         result.forEach(item => {
-            for (let i = 0; i < this.btns.length; i++) {
-                this.btns[i].addEventListener("click", function () {
-                    let current = document.getElementsByClassName("button active");
-                    current[0].className = current[0].className.replace(" active", "");
-                    this.className += " active";
-                    let tableItem = document.getElementById(item.id);
-                    if (tableItem) {
-                        tableItem.remove()
-                    }
-                });
+            let tableItem = document.getElementById(item.id);
+            if (tableItem) {
+                tableItem.remove()
             }
         })
 

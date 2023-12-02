@@ -23,19 +23,22 @@ export class ExpensesAndIncome {
 
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse')
 
-        this.popupExpAndInc = document.getElementById('popup-expense-and-income')
-        this.popupDeleteOperation = document.getElementById('popup-delete-operation')
+        this.popupExpAndInc = document.getElementById('popup-expense-and-income');
+        this.popupDeleteOperation = document.getElementById('popup-delete-operation');
 
-        this.buttonAll = document.getElementById('button-all')
-        this.buttonWeek = document.getElementById('button-week')
-        this.buttonMonth = document.getElementById('button-month')
-        this.buttonYear = document.getElementById('button-year')
-        this.buttonToday = document.getElementById('button-today')
-        this.buttonInterval = document.getElementById('button-interval')
-        this.buttonIntervalFrom = document.getElementById('from')
-        this.buttonIntervalTo = document.getElementById('to')
+        this.buttonAll = document.getElementById('button-all');
+        this.buttonWeek = document.getElementById('button-week');
+        this.buttonMonth = document.getElementById('button-month');
+        this.buttonYear = document.getElementById('button-year');
+        this.buttonToday = document.getElementById('button-today');
+        this.buttonInterval = document.getElementById('button-interval');
+        this.buttonIntervalFrom = document.getElementById('from');
+        this.buttonIntervalTo = document.getElementById('to');
 
-        this.btns = document.querySelectorAll('.button')
+        this.btns = document.querySelectorAll('.button');
+
+        this.tableBody = document.getElementById('table-body');
+
 
         this.removeElement()
         this.inactive()
@@ -114,37 +117,37 @@ export class ExpensesAndIncome {
             }
         }
 
-        $( function() {
+        $(function () {
             var dateFormat = "mm/dd/yy",
-                from = $( "#from" )
+                from = $("#from")
                     .datepicker({
                         defaultDate: "+1w",
                         changeMonth: true,
                         numberOfMonths: 1
                     })
-                    .on( "change", function() {
-                        to.datepicker( "option", "minDate", getDate( this ) );
+                    .on("change", function () {
+                        to.datepicker("option", "minDate", getDate(this));
                     }),
-                to = $( "#to" ).datepicker({
+                to = $("#to").datepicker({
                     defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 1
                 })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    .on("change", function () {
+                        from.datepicker("option", "maxDate", getDate(this));
                     });
 
-            function getDate( element ) {
+            function getDate(element) {
                 var date;
                 try {
-                    date = $.datepicker.parseDate( dateFormat, element.value );
-                } catch( error ) {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
                     date = null;
                 }
 
                 return date;
             }
-        } );
+        });
     }
 
 
@@ -199,9 +202,7 @@ export class ExpensesAndIncome {
     showTableElements(result) {
         const that = this
 
-        this.tableBody = document.getElementById('table-body');
         result.forEach(item => {
-
             let tableItems = document.getElementById(item.id);
             if (tableItems) {
                 tableItems.remove()

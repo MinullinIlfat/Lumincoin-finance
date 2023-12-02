@@ -107,8 +107,14 @@ export class ExpensesAndIncome {
 
 
         this.buttonInterval.onclick = async function () {
+
+            let from = that.buttonIntervalFrom.value.split('/')
+            
+            let to = that.buttonIntervalTo.value.split('/')
+            from = from[2] + '-' + from[0] + '-' + from[1]
+            to = to[2] + '-' + to[0] + '-' + to[1]
             try {
-                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' + this.buttonIntervalTo.value);
+                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + from + '&dateTo=' + to);
                 if (result) {
                     that.showTableElements(result)
                 }
@@ -118,7 +124,7 @@ export class ExpensesAndIncome {
         }
 
         $(function () {
-            var dateFormat = "mm/dd/yy",
+            let dateFormat = "mm/dd/yy",
                 from = $("#from")
                     .datepicker({
                         defaultDate: "+1w",
@@ -138,13 +144,12 @@ export class ExpensesAndIncome {
                     });
 
             function getDate(element) {
-                var date;
+                let date;
                 try {
                     date = $.datepicker.parseDate(dateFormat, element.value);
                 } catch (error) {
                     date = null;
                 }
-
                 return date;
             }
         });
@@ -201,11 +206,14 @@ export class ExpensesAndIncome {
 
     showTableElements(result) {
         const that = this
-
         result.forEach(item => {
-            let tableItems = document.getElementById(item.id);
-            if (tableItems) {
-                tableItems.remove()
+            for (let i = 0; i < this.btns.length; i++) {
+                this.btns[i].addEventListener("click", function () {
+                    let tableItems = document.getElementById(item.id);
+                    if (tableItems) {
+                        tableItems.remove()
+                    }
+                });
             }
 
             const tableItem = document.createElement('tr');

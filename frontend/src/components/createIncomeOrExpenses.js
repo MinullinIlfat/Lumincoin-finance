@@ -32,22 +32,6 @@ export class CreateIncomeOrExpenses {
         }
     }
 
-    async expenseCategories() {
-        const userInfo = Auth.getUserInfo();
-        if (!userInfo) {
-            location.href = '#/login'
-        }
-        try {
-            const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
-            if (resultExpense) {
-                this.selectCategoriesExpense(resultExpense)
-                this.createNewOperation(resultExpense)
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     selectCategoriesIncome(result) {
         result.forEach(item => {
             const option = document.createElement('option')
@@ -68,6 +52,23 @@ export class CreateIncomeOrExpenses {
                 }
             })
         })
+    }
+
+    async expenseCategories() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        try {
+            const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
+            if (resultExpense) {
+                this.selectCategoriesExpense(resultExpense)
+                this.createNewOperation(resultExpense)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     selectCategoriesExpense(resultExpense) {

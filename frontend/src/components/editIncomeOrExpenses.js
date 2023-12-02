@@ -39,7 +39,14 @@ export class EditIncomeOrExpenses {
             option.setAttribute('id', item.id);
             option.className = 'option-element';
             option.innerText = item.title
-            if (this.createTypeOperation.value === 'income') {
+            // console.log(this.createTypeOperation.value)
+
+            let indexSelected = this.createTypeOperation.selectedIndex,
+                options = this.createTypeOperation.querySelectorAll('option')[indexSelected];
+
+            let selectedId = options.getAttribute('id');
+
+            if (selectedId === 'one') {
                 option.style.display = 'block'
             } else {
                 option.style.display = 'none'
@@ -81,7 +88,16 @@ export class EditIncomeOrExpenses {
             optionExp.setAttribute('id', itemExp.id);
             optionExp.className = 'option-element-exp';
             optionExp.innerText = itemExp.title
-            if (this.createTypeOperation.value === 'expense') {
+
+            let indexSelected = this.createTypeOperation.selectedIndex,
+                option = this.createTypeOperation.querySelectorAll('option')[indexSelected];
+
+            let selectedId = option.getAttribute('id');
+
+
+            // console.log(selectedId)
+
+            if (selectedId === 'two') {
                 optionExp.style.display = 'block'
             }  else {
                 optionExp.style.display = 'none'
@@ -117,8 +133,9 @@ export class EditIncomeOrExpenses {
         comment = comment.replace(/[^а-яёa-z1-9]/gi, ' ');
         comment = comment.replace(/\s+/g, ' ').trim();
 
-        // console.log(date)
 
+        date = date.split('.')
+        date = date[2] + '-' + date [1] + '-' + date[0]
         result.forEach(item => {
             if (item.title === category) {
                 this.createCategoryOperation.value = item.title
@@ -132,7 +149,7 @@ export class EditIncomeOrExpenses {
         }
 
         this.createAmountOperation.value = amount
-        // this.createDateOperation.value = date
+        this.createDateOperation.value = date
         this.createCommentOperation.value = comment
         // this.inputMask()
     }

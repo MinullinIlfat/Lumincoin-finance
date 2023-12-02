@@ -119,6 +119,10 @@ body {
     max-width: 397px;
 }
 
+/*.option-element, .option-element-exp {*/
+/*    display: none;*/
+/*}*/
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; // Yeah, yeah everybody write about it

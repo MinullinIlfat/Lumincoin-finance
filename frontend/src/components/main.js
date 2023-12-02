@@ -156,7 +156,6 @@ export class Main {
                 incomeArrCategory.push(item.category)
             }
         })
-        console.log(incomeArrCategory.toString())
 
 
         Chart.defaults.global.defaultFontFamily = "Roboto-Medium";
@@ -171,16 +170,7 @@ export class Main {
         canvasExpenses.height = 467;
 
         let incomeChartData = {
-            labels: [
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue",
-                "Pink",
-                "Aqua",
-                "DarkMagenta"
-            ],
+            labels: incomeArrCategory,
             datasets: [
                 {
                     data: incomeArrAmount,
@@ -203,16 +193,7 @@ export class Main {
         });
 
         let expensesChartData = {
-            labels: [
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue",
-                "Pink",
-                "Aqua",
-                "DarkMagenta"
-            ],
+            labels: expenseArrCategory,
             datasets: [
                 {
                     data: expenseArrAmount,

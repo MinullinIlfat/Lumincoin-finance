@@ -1,10 +1,10 @@
 let exit = document.getElementById('sidebar-dropdown-name-exit');
 
 document.getElementById('profile-full-name').onclick = function () {
-    if (exit.style.display === 'none') {
-        exit.style.display = 'block';
-    } else {
+    if (exit.style.display === 'block') {
         exit.style.display = 'none';
+    } else {
+        exit.style.display = 'block';
     }
 }
 

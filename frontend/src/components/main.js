@@ -30,9 +30,10 @@ export class Main {
         this.buttonIntervalFrom = document.getElementById('from')
         this.buttonIntervalTo = document.getElementById('to')
 
+        this.btns = document.querySelectorAll('.button')
+
         this.removeElement()
         this.inactive()
-        this.activeElement()
         this.init()
     }
 
@@ -47,6 +48,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=all');
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -57,6 +59,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=week');
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -67,6 +70,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=month');
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -77,6 +81,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=year');
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -87,6 +92,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=today');
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -100,6 +106,7 @@ export class Main {
                 const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' + this.buttonIntervalTo.value);
                 if (result) {
                     that.testChart(result)
+                    that.activeElement(result)
                 }
             } catch (error) {
                 console.log(error);
@@ -230,11 +237,26 @@ export class Main {
         })
     }
 
-    activeElement() {
+    activeElement(result) {
         this.sidebarMain.classList.add('nav-link', 'active');
         this.sidebarMainText.classList.add('nav-link', 'active');
         this.sidebarMainText.classList.remove('link-dark');
         this.ssidebarMainSvg.style.fill = 'white';
+
+        result.forEach(item => {
+            for (let i = 0; i < this.btns.length; i++) {
+                this.btns[i].addEventListener("click", function () {
+                    let current = document.getElementsByClassName("button active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                    let tableItem = document.getElementById(item.id);
+                    if (tableItem) {
+                        tableItem.remove()
+                    }
+                });
+            }
+        })
+
     }
 
     inactive() {

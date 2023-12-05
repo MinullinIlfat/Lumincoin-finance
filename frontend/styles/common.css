@@ -117,11 +117,14 @@ body {
     line-height: 24px;
     padding: 7px 0 7px 16px;
     max-width: 397px;
+    appearance: none;
+    color: #6C757D;
 }
 
-/*.option-element, .option-element-exp {*/
-/*    display: none;*/
-/*}*/
+.create-value input, .create-value select {
+    color: #000000;
+;
+}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

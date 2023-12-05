@@ -4,29 +4,29 @@ import config from "../../config/config.js";
 
 export class EditCategoryExpenses {
     constructor() {
-        this.inputNameElement = document.getElementById('input-name-expenses')
-        this.btnSaveElement = document.getElementById('btn-save-expense')
+        this.inputNameElement = document.getElementById('input-name-expenses');
+        this.btnSaveElement = document.getElementById('btn-save-expense');
 
-        this.addInputNameExpenses()
-        this.newNameExpense()
+        this.addInputNameExpenses();
+        this.newNameExpense();
     }
 
     addInputNameExpenses() {
-        let result = localStorage.getItem('BlockName')
+        let result = localStorage.getItem('BlockName');
         result = result.replace(/[^а-яё]/gi, ' ');
-        this.inputNameElement.placeholder = result
+        this.inputNameElement.placeholder = result;
     }
 
     newNameExpense() {
-        const that = this
-        let resultId = localStorage.getItem('BlockId')
-        JSON.parse(resultId)
+        const that = this;
+        let resultId = localStorage.getItem('BlockId');
+        JSON.parse(resultId);
         resultId = resultId.replace(/[^1-9]/gi, ' ');
-        resultId = parseInt(resultId)
+        resultId = parseInt(resultId);
         this.btnSaveElement.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {
-                location.href = '#/login'
+                location.href = '#/login';
             }
 
             try {

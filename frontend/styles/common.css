@@ -7,6 +7,7 @@
     font-family: Roboto-Medium;
     src: url("../fonts/Roboto-Medium.ttf");
 }
+
 @font-face {
     font-family: Roboto-Regular;
     src: url("../fonts/Roboto-Regular.ttf");
@@ -22,13 +23,11 @@ body {
 }
 
 .title {
-    font-family: Roboto-Medium,sans-serif;
+    font-family: Roboto-Medium, sans-serif;
     font-size: 40px;
-    color:#052C65;
+    color: #052C65;
     margin-bottom: 40px;
 }
-
-/**/
 
 .title {
     margin-bottom: 40px;
@@ -59,7 +58,6 @@ body {
     color: #CED4DA;
     text-align: center;
     text-decoration: none;
-    /*padding: 44px;*/
 }
 
 .popup {
@@ -123,12 +121,11 @@ body {
 
 .create-value input, .create-value select {
     color: #000000;
-;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none; // Yeah, yeah everybody write about it
+    -webkit-appearance: none;
 }
 
 input[type='number'],
@@ -141,8 +138,6 @@ input[type="number"]:focus {
 .category-item-add {
     cursor: pointer;
 }
-
-/**/
 
 .menu {
     margin-bottom: 40px;
@@ -217,7 +212,7 @@ input[type="number"]:focus {
     border: 0
 }
 
-.table  a {
+.table a {
     text-decoration: none;
 }
 
@@ -225,7 +220,7 @@ input[type="number"]:focus {
     cursor: pointer;
 }
 
-.table-head th{
+.table-head th {
     color: #052C65 !important;
     font-family: Roboto-Medium, sans-serif;
     font-size: 16px;
@@ -257,7 +252,6 @@ input[type="number"]:focus {
 .chartjs-size-monitor {
     color: #000000;
     background: black;
-
 }
 
 .chart {

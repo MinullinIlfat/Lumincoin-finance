@@ -28,7 +28,7 @@ export class Expenses {
         this.popupExpenses = document.getElementById('popup-expenses')
 
         this.removeElement()
-        this.inactive ()
+        this.inactive()
         this.activeElement()
         this.init()
     }
@@ -133,13 +133,13 @@ export class Expenses {
         localStorage.removeItem('BlockName')
         localStorage.removeItem('BlockId')
     }
+
     activeElement() {
         this.expensesElement.classList.remove('link-dark')
         this.expensesElement.classList.add('nav-link', 'active')
         this.expensesElement.style.borderRadius = '0px'
         this.expensesElement.style.borderBottomLeftRadius = '5px'
         this.expensesElement.style.borderBottomRightRadius = '5px'
-
 
 
         this.sidebarCategoryCollapseElements.classList.add('nav-link', 'active')
@@ -159,17 +159,17 @@ export class Expenses {
         this.sidebarCategoryElement.style.borderRadius = '5px'
     }
 
-    inactive () {
+    inactive() {
         this.incomeElement.style.borderRadius = '0px'
         this.incomeTextElement.classList.remove('link-dark')
 
         this.sidebarFinance.classList.remove('nav-link', 'active')
-        this.sidebarFinanceText.classList.remove( 'active')
+        this.sidebarFinanceText.classList.remove('active')
         this.sidebarFinanceText.classList.add('link-dark')
         this.sidebarFinanceSvg.style.fill = 'black'
 
         this.sidebarMain.classList.remove('nav-link', 'active');
-        this.sidebarMainText.classList.remove( 'active');
+        this.sidebarMainText.classList.remove('active');
         this.sidebarMainText.classList.add('link-dark');
         this.ssidebarMainSvg.style.fill = 'black';
     }

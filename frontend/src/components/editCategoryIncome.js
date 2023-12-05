@@ -12,22 +12,22 @@ export class EditCategoryIncome {
     }
 
     addInputNameIncome() {
-        let result = localStorage.getItem('BlockName')
-        JSON.parse(result)
+        let result = localStorage.getItem('BlockName');
+        JSON.parse(result);
         this.result = result.replace(/[^а-яё]/gi, ' ');
-        this.inputNameElement.placeholder = this.result
+        this.inputNameElement.placeholder = this.result;
     }
 
     newNameIncome() {
-        const that = this
-        let resultId = localStorage.getItem('BlockId')
-        JSON.parse(resultId)
+        const that = this;
+        let resultId = localStorage.getItem('BlockId');
+        JSON.parse(resultId);
         resultId = resultId.replace(/[^1-9]/gi, ' ');
-        resultId = parseInt(resultId)
+        resultId = parseInt(resultId);
         this.btnSaveElement.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {
-                location.href = '#/login'
+                location.href = '#/login';
             }
 
             try {

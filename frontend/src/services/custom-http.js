@@ -10,7 +10,7 @@ export class CustomHttp {
             },
         };
 
-        let token = localStorage.getItem(Auth.accessTokenKey)
+        let token = localStorage.getItem(Auth.accessTokenKey);
         if (token) {
             params.headers['x-auth-token'] = token;
         }
@@ -30,10 +30,8 @@ export class CustomHttp {
                     return null;
                 }
             }
-
             throw new Error(response.message);
         }
-
         return await response.json();
     }
 }

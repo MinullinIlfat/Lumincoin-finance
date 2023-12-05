@@ -26,7 +26,7 @@ export class Router {
                 template: 'templates/main.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Main()
+                    new Main();
                 }
             },
             {
@@ -53,7 +53,7 @@ export class Router {
                 template: 'templates/expensesAndIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new ExpensesAndIncome()
+                    new ExpensesAndIncome();
                 }
             },
             {
@@ -62,7 +62,7 @@ export class Router {
                 template: 'templates/income.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Income()
+                    new Income();
                 }
             },
             {
@@ -71,7 +71,7 @@ export class Router {
                 template: 'templates/expenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Expenses()
+                    new Expenses();
                 }
             },
             {
@@ -80,7 +80,7 @@ export class Router {
                 template: 'templates/editIncomeOrExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new EditIncomeOrExpenses()
+                    new EditIncomeOrExpenses();
                 }
             },
             {
@@ -89,7 +89,7 @@ export class Router {
                 template: 'templates/createIncomeOrExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new CreateIncomeOrExpenses()
+                    new CreateIncomeOrExpenses();
                 }
             },
             {
@@ -98,7 +98,7 @@ export class Router {
                 template: 'templates/editCategoryIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new EditCategoryIncome()
+                    new EditCategoryIncome();
                 }
             },
             {
@@ -107,7 +107,7 @@ export class Router {
                 template: 'templates/createCategoryIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new CreateCategoryIncome()
+                    new CreateCategoryIncome();
                 }
             },
             {
@@ -116,7 +116,7 @@ export class Router {
                 template: 'templates/editCategoryExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new EditCategoryExpenses()
+                    new EditCategoryExpenses();
                 }
             },
             {
@@ -125,12 +125,12 @@ export class Router {
                 template: 'templates/createCategoryExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new CreateCategoryExpenses()
+                    new CreateCategoryExpenses();
                 }
             },
-
         ]
     }
+
     async openRoute() {
         const urlRoute = window.location.hash.split('?')[0];
         if (urlRoute === '#/logout') {
@@ -160,7 +160,6 @@ export class Router {
         if (userInfo && accessToken) {
             this.profileFullNameElement.innerText = userInfo.fullName;
         }
-
         newRoute.load();
     }
 }

@@ -1,6 +1,7 @@
 section {
     justify-content: center;
 }
+
 .container {
     padding: 280px 0;
 }
@@ -34,7 +35,7 @@ section {
 }
 
 .btn {
-    font-family: Roboto-Medium,sans-serif;
+    font-family: Roboto-Medium, sans-serif;
     font-size: 15px;
     line-height: 18px;
 }

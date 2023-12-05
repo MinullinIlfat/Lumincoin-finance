@@ -199,6 +199,7 @@ export class EditIncomeOrExpenses {
             that.removeLocalStorage()
         }
     }
+
     removeLocalStorage() {
         localStorage.removeItem('Type');
         localStorage.removeItem('Amount');

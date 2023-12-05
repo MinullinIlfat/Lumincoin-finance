@@ -23,11 +23,10 @@ export class Auth {
                     return true;
                 }
             }
-        } else {
-            this.removeTokens();
-            location.href = '#/login';
-            return false;
         }
+        this.removeTokens();
+        location.href = '#/login';
+        return false;
     }
 
     static setTokens(accessToken, refreshToken) {

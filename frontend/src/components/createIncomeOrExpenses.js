@@ -10,13 +10,12 @@ export class CreateIncomeOrExpenses {
         this.newCreateDateOperation = document.getElementById('new-create-date-operation');
         this.newCreateCommentOperation = document.getElementById('new-create-comment-operation');
         this.saveNewCreateOperation = document.getElementById('save-new-create-operation');
+        this.category = null
 
-
-        this.incomeCategories();
-        this.expenseCategories();
+        this.Categories();
     }
 
-    async incomeCategories() {
+    async Categories() {
         const userInfo = Auth.getUserInfo();
         if (!userInfo) {
             location.href = '#/login'
@@ -24,104 +23,97 @@ export class CreateIncomeOrExpenses {
         try {
             const result = await CustomHttp.request(config.host + '/categories/income');
             if (result) {
-                this.selectCategoriesIncome(result)
                 this.createNewOperation(result)
             }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+            result.forEach(item => {
+                const option = document.createElement('option')
+                option.setAttribute('value', item.title);
+                option.setAttribute('id', item.id);
+                option.className = 'option-element';
+                option.innerText = item.title
 
-    selectCategoriesIncome(result) {
-        result.forEach(item => {
-            const option = document.createElement('option')
-            option.setAttribute('value', item.title);
-            option.setAttribute('id', item.id);
-            option.className = 'option-element';
-            option.innerText = item.title
-            option.style.display = 'none'
+                let indexSelected = this.newCreateTypeOperation.selectedIndex,
+                    options = this.newCreateTypeOperation.querySelectorAll('option')[indexSelected];
 
-            this.newCreateCategoryOperation.appendChild(option)
-
-            this.newCreateTypeOperation.addEventListener('change', (e) => {
-                if (this.newCreateTypeOperation.value === 'expense') {
-                    option.style.display = 'none'
-                    this.newCreateCategoryOperation.value = ' '
-                } else {
+                let selectedId = options.getAttribute('id');
+                if (selectedId === 'one') {
                     option.style.display = 'block'
+                } else {
+                    option.style.display = 'none'
                 }
-            })
-        })
-    }
 
-    async expenseCategories() {
-        const userInfo = Auth.getUserInfo();
-        if (!userInfo) {
-            location.href = '#/login'
-        }
-        try {
+                this.newCreateCategoryOperation.appendChild(option)
+
+                this.newCreateTypeOperation.addEventListener('change', (e) => {
+                    if (this.newCreateTypeOperation.value === 'expense') {
+                        option.style.display = 'none'
+                    } else {
+                        option.style.display = 'block'
+                    }
+                })
+                this.newCreateCategoryOperation.addEventListener('change', (e) => {
+                    result.forEach(item => {
+                        if (item.title && this.newCreateCategoryOperation.value === item.title) {
+                            this.category = item.id
+                            return this.category
+                        }
+                    })
+                })
+            })
+
             const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
-            if (resultExpense) {
-                this.selectCategoriesExpense(resultExpense)
-                this.createNewOperation(resultExpense)
-            }
+            this.createNewOperation(resultExpense)
+            resultExpense.forEach(itemExp => {
+                const optionExp = document.createElement('option')
+                optionExp.setAttribute('value', itemExp.title);
+                optionExp.setAttribute('id', itemExp.id);
+                optionExp.className = 'option-element-exp';
+                optionExp.innerText = itemExp.title
+
+                let indexSelected = this.newCreateTypeOperation.selectedIndex,
+                    option = this.newCreateTypeOperation.querySelectorAll('option')[indexSelected];
+
+                let selectedId = option.getAttribute('id');
+
+                if (selectedId === 'two') {
+                    optionExp.style.display = 'block'
+                } else {
+                    optionExp.style.display = 'none'
+                }
+
+                this.newCreateCategoryOperation.appendChild(optionExp)
+                this.newCreateTypeOperation.addEventListener('change', (e) => {
+                    if (this.newCreateTypeOperation.value === 'income') {
+                        optionExp.style.display = 'none'
+                    } else {
+                        optionExp.style.display = 'block'
+                    }
+                })
+
+                this.newCreateCategoryOperation.addEventListener('change', (e) => {
+                    resultExpense.forEach(item => {
+                        if (item.title && this.newCreateCategoryOperation.value === item.title) {
+                            this.category = item.id
+                            return this.category
+                        }
+                    })
+                })
+            })
         } catch (error) {
             console.log(error);
         }
-
     }
-
-    selectCategoriesExpense(resultExpense) {
-        resultExpense.forEach(itemExp => {
-            const optionExp = document.createElement('option')
-            optionExp.setAttribute('value', itemExp.title);
-            optionExp.setAttribute('id', itemExp.id);
-            optionExp.className = 'option-element-exp';
-            optionExp.innerText = itemExp.title
-            optionExp.style.display = 'none'
-
-            this.newCreateCategoryOperation.appendChild(optionExp)
-
-            this.newCreateTypeOperation.addEventListener('change', (e) => {
-
-                if (this.newCreateTypeOperation.value === 'income') {
-                    optionExp.style.display = 'none'
-                } else {
-                    optionExp.style.display = 'block'
-                }
-            })
-        })
-    }
-
     createNewOperation(result) {
         const that = this
-        let testCategory
-        let category
-
-        this.newCreateCategoryOperation.addEventListener('change', (e) => {
-            result.forEach(item => {
-                if (item.title && this.newCreateCategoryOperation.value === item.title) {
-                    testCategory = item.id
-
-                }
-            })
-            if (testCategory) {
-                // console.log(testCategory)
-                category = testCategory
-                // console.log(category)
-            }
-            // console.log(category)
-        })
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();
             if (!userInfo) {
                 location.href = '#/login'
             }
             try {
-                // console.log(category)
                 const result = CustomHttp.request(config.host + '/operations', "POST", {
                     type: that.newCreateTypeOperation.value,
-                    category_id: category,
+                    category_id: that.category,
                     amount: that.newCreateAmountOperation.value,
                     date: that.newCreateDateOperation.value,
                     comment: that.newCreateCommentOperation.value

@@ -206,6 +206,8 @@ export class ExpensesAndIncome {
 
     showTableElements(result) {
         const that = this
+        let counter = 1
+
         result.forEach(item => {
             for (let i = 0; i < this.btns.length; i++) {
                 this.btns[i].addEventListener("click", function () {
@@ -222,7 +224,7 @@ export class ExpensesAndIncome {
 
             const tableItemScope = document.createElement('th');
             tableItemScope.setAttribute('scope', 'row');
-            tableItemScope.innerText = item.id;
+            tableItemScope.innerText = counter.toString()
 
             const tableItemType = document.createElement('td');
             tableItemType.className = 'row-name-green';
@@ -321,7 +323,7 @@ export class ExpensesAndIncome {
                     }
                 }
             })
-
+            counter += 1
         })
     }
 }

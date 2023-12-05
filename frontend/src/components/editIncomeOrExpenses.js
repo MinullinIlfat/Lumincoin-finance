@@ -11,6 +11,8 @@ export class EditIncomeOrExpenses {
         this.createCommentOperation = document.getElementById('create-comment-operation');
         this.createOperationSaveBtn = document.getElementById('create-operation-save-btn');
 
+        this.category = null;
+
         this.Categories()
     }
 
@@ -53,6 +55,7 @@ export class EditIncomeOrExpenses {
                 this.createTypeOperation.addEventListener('change', (e) => {
                     if (this.createTypeOperation.value === 'expense') {
                         option.style.display = 'none'
+                        this.createCategoryOperation.value = ' '
                     } else {
                         option.style.display = 'block'
                     }
@@ -61,13 +64,21 @@ export class EditIncomeOrExpenses {
 
             if (type === 'доход') {
                 result.forEach(item => {
-                    console.log(item)
                     if (item.title === category) {
                         this.createCategoryOperation.value = category
+                        this.category = item.id
+                        return this.category
                     }
                 })
             }
-
+            this.createCategoryOperation.addEventListener('change', (e) => {
+                result.forEach(item => {
+                    if (item.title && this.createCategoryOperation.value === item.title) {
+                        this.category = item.id
+                        return this.category
+                    }
+                })
+            })
 
             const resultExpense = await CustomHttp.request(config.host + '/categories/expense');
             if (type === 'доход') {
@@ -102,6 +113,7 @@ export class EditIncomeOrExpenses {
 
                     if (this.createTypeOperation.value === 'income') {
                         optionExp.style.display = 'none'
+                        this.createCategoryOperation.value = ' '
                     } else {
                         optionExp.style.display = 'block'
                     }
@@ -112,16 +124,26 @@ export class EditIncomeOrExpenses {
                 resultExpense.forEach(item => {
                     if (item.title === category) {
                         this.createCategoryOperation.value = category
+                        this.category = item.id
+                        return this.category
                     }
                 })
             }
+            this.createCategoryOperation.addEventListener('change', (e) => {
+                resultExpense.forEach(item => {
+                    if (item.title && this.createCategoryOperation.value === item.title) {
+                        this.category = item.id
+                        return this.category
+                    }
+                })
+            })
 
         } catch (error) {
             console.log(error);
         }
     }
 
-    addInputNameOperations(result) {
+    addInputNameOperations() {
         let type = localStorage.getItem('Type')
         let amount = localStorage.getItem('Amount')
         let date = localStorage.getItem('Date')
@@ -148,13 +170,7 @@ export class EditIncomeOrExpenses {
         this.createCommentOperation.value = comment
     }
 
-    editOperation(result) {
-        let category = null;
-        result.forEach(item => {
-            if (this.createCategoryOperation.value === item.title) {
-                category = item.id
-            }
-        })
+    editOperation() {
         const that = this
         let operationId = localStorage.getItem('OperationId')
         JSON.parse(operationId)
@@ -169,7 +185,7 @@ export class EditIncomeOrExpenses {
             try {
                 const result = CustomHttp.request(config.host + '/operations/' + operationId, "PUT", {
                     type: that.createTypeOperation.value,
-                    category_id: category,
+                    category_id: that.category,
                     amount: that.createAmountOperation.value,
                     date: that.createDateOperation.value,
                     comment: that.createCommentOperation.value
@@ -180,6 +196,15 @@ export class EditIncomeOrExpenses {
             } catch (error) {
                 console.log(error);
             }
+            that.removeLocalStorage()
         }
+    }
+    removeLocalStorage() {
+        localStorage.removeItem('Type');
+        localStorage.removeItem('Amount');
+        localStorage.removeItem('Date');
+        localStorage.removeItem('Comment');
+        localStorage.removeItem('Category');
+        localStorage.removeItem('OperationId');
     }
 }

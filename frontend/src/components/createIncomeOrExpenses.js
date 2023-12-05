@@ -47,6 +47,7 @@ export class CreateIncomeOrExpenses {
                 this.newCreateTypeOperation.addEventListener('change', (e) => {
                     if (this.newCreateTypeOperation.value === 'expense') {
                         option.style.display = 'none'
+                        this.newCreateCategoryOperation.value = ' '
                     } else {
                         option.style.display = 'block'
                     }
@@ -85,6 +86,7 @@ export class CreateIncomeOrExpenses {
                 this.newCreateTypeOperation.addEventListener('change', (e) => {
                     if (this.newCreateTypeOperation.value === 'income') {
                         optionExp.style.display = 'none'
+                        this.newCreateCategoryOperation.value = ' '
                     } else {
                         optionExp.style.display = 'block'
                     }
@@ -103,7 +105,7 @@ export class CreateIncomeOrExpenses {
             console.log(error);
         }
     }
-    createNewOperation(result) {
+    createNewOperation() {
         const that = this
         this.saveNewCreateOperation.onclick = function () {
             const userInfo = Auth.getUserInfo();

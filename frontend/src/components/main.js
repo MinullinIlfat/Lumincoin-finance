@@ -102,8 +102,14 @@ export class Main {
 
 
         this.buttonInterval.onclick = async function () {
+
+            let from = that.buttonIntervalFrom.value.split('/')
+
+            let to = that.buttonIntervalTo.value.split('/')
+            from = from[2] + '-' + from[0] + '-' + from[1]
+            to = to[2] + '-' + to[0] + '-' + to[1]
             try {
-                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + this.buttonIntervalFrom.value + '&dateTo=' + this.buttonIntervalTo.value);
+                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + from + '&dateTo=' + to);
                 if (result) {
                     that.testChart(result)
                     that.activeElement(result)
@@ -112,6 +118,8 @@ export class Main {
                 console.log(error);
             }
         }
+
+
 
         $( function() {
             let dateFormat = "mm/dd/yy",

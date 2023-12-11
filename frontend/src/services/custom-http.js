@@ -23,7 +23,7 @@ export class CustomHttp {
 
         if (response.status < 200 || response.status >= 300) {
             if (response.status === 401) {
-                const result = Auth.processUnauthorizedResponse();
+                const result = await Auth.processUnauthorizedResponse();
                 if (result) {
                     return await this.request(url, method, body);
                 } else {

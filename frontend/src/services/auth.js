@@ -13,9 +13,8 @@ export class Auth {
                 headers: {
                     'Content-type': 'application/json',
                     'Accept': 'application/json',
-                    'x-auth-token': refreshToken,
                 },
-                // body: JSON.stringify({refreshToken: refreshToken})
+                body: JSON.stringify({refreshToken: refreshToken})
             });
             if (response && response.status === 200) {
                 const result = await response.json();

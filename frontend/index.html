@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title id="title">Главная</title>
+    <link rel="stylesheet" href="styles/jquery-ui.min.css">
+    <link rel="stylesheet" href="styles/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+
     <link rel="stylesheet" href="styles/common.css">
     <link rel="stylesheet" id="styles" href="styles/index.css">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
@@ -11,31 +14,34 @@
 <body>
 
 <section class="d-flex">
-    <div class="sidebar d-flex flex-column flex-shrink-0 pe-3 ps-3 bg-light" style="width: 235px;">
+    <div id="sidebar" class="sidebar d-flex flex-column flex-shrink-0 pe-3 ps-3 bg-light" style="width: 235px;">
         <a href="#/" class="logo text-center">
             <img src="images/Logo.png" alt="Логотип">
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="sidebar-main nav-item p-0" id="sidebar-main">
-                <a href="#/" id="sidebar-main-text" class="button-element nav-link active align-items-center d-flex" aria-current="page">
-                    <svg id="sidebar-main-svg" class="svg-element main-svg me-2" width="15" height="14" viewBox="0 0 15 14"
+                <a href="#/" id="sidebar-main-text" class="button-element nav-link active align-items-center d-flex"
+                   aria-current="page">
+                    <svg id="sidebar-main-svg" class="svg-element main-svg me-2" width="15" height="14"
+                         viewBox="0 0 15 14"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M1.5 12.3964V5.89644H2.5V12.3964C2.5 12.6726 2.72386 12.8964 3 12.8964H12C12.2761 12.8964 12.5 12.6726 12.5 12.3964V5.89644H13.5V12.3964C13.5 13.2249 12.8284 13.8964 12 13.8964H3C2.17157 13.8964 1.5 13.2249 1.5 12.3964Z"
-                              />
+                        />
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12.5 1.39644V4.89644L10.5 2.89644V1.39644C10.5 1.1203 10.7239 0.89644 11 0.89644H12C12.2761 0.89644 12.5 1.1203 12.5 1.39644Z"
-                              />
+                        />
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M6.79289 0.39644C7.18342 0.00591397 7.81658 0.00591606 8.20711 0.39644L14.8536 7.04289C15.0488 7.23815 15.0488 7.55473 14.8536 7.74999C14.6583 7.94526 14.3417 7.94526 14.1464 7.74999L7.5 1.10355L0.853553 7.74999C0.658291 7.94526 0.341709 7.94526 0.146447 7.74999C-0.0488155 7.55473 -0.0488155 7.23815 0.146447 7.04289L6.79289 0.39644Z"
-                              />
+                        />
                     </svg>
                     Главная
                 </a>
             </li>
             <li class="sidebar-finance p-0" id="sidebar-finance">
-                <a href="#/expensesAndIncome" id="sidebar-finance-text" class="button-element pe-1 nav-link link-dark align-items-center d-flex">
+                <a href="#/expensesAndIncome" id="sidebar-finance-text"
+                   class="button-element pe-1 nav-link link-dark align-items-center d-flex">
                     <svg class="me-2" id="sidebar-finance-svg" width="16" height="16" viewBox="0 0 16 16"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -53,10 +59,12 @@
             </li>
             <li class="sidebar-category mb-1" id="sidebar-category">
                 <div class="sidebar-category-collapse p-0 collapse-button" id="sidebar-category-collapse">
-                    <a href="#" id="category-button" class="button-element nav-link link-dark d-inline-flex align-items-center rounded border-0 collapsed"
+                    <a href="#" id="category-button"
+                       class="button-element nav-link link-dark d-inline-flex align-items-center rounded border-0 collapsed"
                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                         Категории
-                        <svg id="category-svg" width="7" height="14" viewBox="0 0 7 14" xmlns="http://www.w3.org/2000/svg"
+                        <svg id="category-svg" width="7" height="14" viewBox="0 0 7 14"
+                             xmlns="http://www.w3.org/2000/svg"
                              aria-expanded="true">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M0.145063 13.3539C0.051021 13.2601 -0.00183105 13.1327 -0.00183105 12.9999C-0.00183105 12.867 0.051021 12.7397 0.145063 12.6459L5.79206 6.99987L0.145063 1.35387C0.0185907 1.2274 -0.0308022 1.04306 0.0154897 0.8703C0.0617817 0.697536 0.196726 0.562593 0.36949 0.5163C0.542254 0.470008 0.726591 0.519401 0.853063 0.645873L6.85306 6.64587C6.9471 6.73968 6.99996 6.86705 6.99996 6.99987C6.99996 7.1327 6.9471 7.26007 6.85306 7.35387L0.853063 13.3539C0.759259 13.4479 0.63189 13.5008 0.499063 13.5008C0.366235 13.5008 0.238867 13.4479 0.145063 13.3539Z"
@@ -65,7 +73,8 @@
                     </a>
                 </div>
                 <div class="collapse" id="orders-collapse" style="">
-                    <ul class="button-element collapse-button link-dark p-1 btn-toggle-nav list-unstyled fw-normal" id="income">
+                    <ul class="button-element collapse-button link-dark p-1 btn-toggle-nav list-unstyled fw-normal"
+                        id="income">
                         <li><a href="#/income" id="income-text"
                                class="button-element small-button link-dark d-inline-flex text-decoration-none rounded pt-2 pb-2 ps-3 pe-2">Доходы</a>
                         </li>
@@ -102,8 +111,11 @@
     </div>
 </section>
 
+<script src="scripts/code.jquery.com_jquery-3.7.0.min.js"></script>
+<script src="scripts/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
+
 <script src="./src/components/common.js"></script>
 <script src="./src/components/main.js" type="module"></script>
 <script src="src/app.js" type="module"></script>

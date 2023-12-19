@@ -1,3 +1,7 @@
+import {Auth} from "../services/auth.js";
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
+
 export class Main {
     constructor() {
         this.buttonElements = document.querySelectorAll('.button-element')
@@ -16,13 +20,159 @@ export class Main {
         this.sidebarFinanceText = document.getElementById('sidebar-finance-text')
         this.sidebarFinanceSvg = document.getElementById('sidebar-finance-svg')
         this.sidebarCategoryCollapseElements = document.getElementById('sidebar-category-collapse');
-        this.testChart()
+
+        this.buttonAll = document.getElementById('button-all')
+        this.buttonWeek = document.getElementById('button-week')
+        this.buttonMonth = document.getElementById('button-month')
+        this.buttonYear = document.getElementById('button-year')
+        this.buttonToday = document.getElementById('button-today')
+        this.buttonInterval = document.getElementById('button-interval')
+        this.buttonIntervalFrom = document.getElementById('from')
+        this.buttonIntervalTo = document.getElementById('to')
+
+        this.btns = document.querySelectorAll('.button')
+
         this.removeElement()
         this.inactive()
-        this.activeElement()
+        this.init()
     }
 
-    testChart() {
+    async init() {
+        const that = this
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
+            location.href = '#/login'
+        }
+        this.buttonAll.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=all');
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonWeek.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=week');
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonMonth.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=month');
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonYear.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=year');
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonToday.onclick = async function () {
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=today');
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        this.buttonToday.click()
+
+
+        this.buttonInterval.onclick = async function () {
+
+            let from = that.buttonIntervalFrom.value.split('/')
+
+            let to = that.buttonIntervalTo.value.split('/')
+            from = from[2] + '-' + from[0] + '-' + from[1]
+            to = to[2] + '-' + to[0] + '-' + to[1]
+            try {
+                const result = await CustomHttp.request(config.host + '/operations/?period=interval&dateFrom=' + from + '&dateTo=' + to);
+                if (result) {
+                    that.testChart(result)
+                    that.activeElement(result)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
+
+        $( function() {
+            let dateFormat = "mm/dd/yy",
+                from = $( "#from" )
+                    .datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 1
+                    })
+                    .on( "change", function() {
+                        to.datepicker( "option", "minDate", getDate( this ) );
+                    }),
+                to = $( "#to" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1
+                })
+                    .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    });
+
+            function getDate( element ) {
+                let date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+
+                return date;
+            }
+        } );
+    }
+
+    testChart(result) {
+        let expenseArrAmount = [];
+        let expenseArrCategory = [];
+        result.forEach(item => {
+            if (item.type === 'expense') {
+                expenseArrAmount.push(item.amount)
+                expenseArrCategory.push(item.category)
+            }
+        })
+        let incomeArrAmount = [];
+        let incomeArrCategory = [];
+        result.forEach(item => {
+            if (item.type === 'income') {
+                incomeArrAmount.push(item.amount)
+                incomeArrCategory.push(item.category)
+            }
+        })
+
+
         Chart.defaults.global.defaultFontFamily = "Roboto-Medium";
         Chart.defaults.global.defaultFontSize = 12;
         Chart.defaults.global.defaultFontColor = "#000000";
@@ -35,22 +185,19 @@ export class Main {
         canvasExpenses.height = 467;
 
         let incomeChartData = {
-            labels: [
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue"
-            ],
+            labels: incomeArrCategory,
             datasets: [
                 {
-                    data: [133.3, 86.2, 52.2, 51.2, 50.2],
+                    data: incomeArrAmount,
                     backgroundColor: [
                         "#DC3545",
                         "#FD7E14",
                         "#FFC107",
                         "#20C997",
-                        "#0D6EFD"
+                        "#0D6EFD",
+                        "#FFC0CB",
+                        "#00FFFF",
+                        "#8B008B"
                     ]
                 }]
         };
@@ -61,22 +208,19 @@ export class Main {
         });
 
         let expensesChartData = {
-            labels: [
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue"
-            ],
+            labels: expenseArrCategory,
             datasets: [
                 {
-                    data: [133.3, 86.2, 52.2, 51.2, 50.2],
+                    data: expenseArrAmount,
                     backgroundColor: [
                         "#DC3545",
                         "#FD7E14",
                         "#FFC107",
                         "#20C997",
-                        "#0D6EFD"
+                        "#0D6EFD",
+                        "#FFC0CB",
+                        "#00FFFF",
+                        "#8B008B"
                     ]
                 }]
         };
@@ -100,11 +244,28 @@ export class Main {
             item.classList.add('nav-item')
         })
     }
-    activeElement() {
+
+    activeElement(result) {
         this.sidebarMain.classList.add('nav-link', 'active');
         this.sidebarMainText.classList.add('nav-link', 'active');
         this.sidebarMainText.classList.remove('link-dark');
         this.ssidebarMainSvg.style.fill = 'white';
+
+        for (let i = 0; i < this.btns.length; i++) {
+            this.btns[i].addEventListener("click", function () {
+                let current = document.getElementsByClassName("button active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+
+        result.forEach(item => {
+            let tableItem = document.getElementById(item.id);
+            if (tableItem) {
+                tableItem.remove()
+            }
+        })
+
     }
 
     inactive() {
@@ -114,14 +275,14 @@ export class Main {
         this.sidebarCategoryCollapseElements.classList.add('link-dark')
 
         this.categoryButtonElement.classList.add('link-dark', 'collapsed')
-        this.categoryButtonElement.classList.remove( 'active')
+        this.categoryButtonElement.classList.remove('active')
 
         this.categorySvgElement.style.fill = 'black'
 
         this.sidebarCategoryElement.style.border = '0px'
 
         this.sidebarFinance.classList.remove('nav-link', 'active')
-        this.sidebarFinanceText.classList.remove( 'active')
+        this.sidebarFinanceText.classList.remove('active')
         this.sidebarFinanceText.classList.add('link-dark')
         this.sidebarFinanceSvg.style.fill = 'black'
 

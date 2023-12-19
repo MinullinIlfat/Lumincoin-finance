@@ -4,6 +4,12 @@ import {Income} from "./components/income.js";
 import {Expenses} from "./components/expenses.js";
 import {Main} from "./components/main.js";
 import {ExpensesAndIncome} from "./components/expensesAndIncome.js";
+import {EditCategoryIncome} from "./components/editCategoryIncome.js";
+import {EditCategoryExpenses} from "./components/editCategoryExpenses.js";
+import {CreateCategoryIncome} from "./components/createCategoryIncome.js";
+import {CreateCategoryExpenses} from "./components/createCategoryExpenses.js";
+import {EditIncomeOrExpenses} from "./components/editIncomeOrExpenses.js";
+import {CreateIncomeOrExpenses} from "./components/createIncomeOrExpenses.js";
 
 export class Router {
 
@@ -20,7 +26,7 @@ export class Router {
                 template: 'templates/main.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Main()
+                    new Main();
                 }
             },
             {
@@ -47,7 +53,7 @@ export class Router {
                 template: 'templates/expensesAndIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new ExpensesAndIncome()
+                    new ExpensesAndIncome();
                 }
             },
             {
@@ -56,7 +62,7 @@ export class Router {
                 template: 'templates/income.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Income()
+                    new Income();
                 }
             },
             {
@@ -65,7 +71,7 @@ export class Router {
                 template: 'templates/expenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-                    new Expenses()
+                    new Expenses();
                 }
             },
             {
@@ -74,7 +80,7 @@ export class Router {
                 template: 'templates/editIncomeOrExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new EditIncomeOrExpenses();
                 }
             },
             {
@@ -83,7 +89,7 @@ export class Router {
                 template: 'templates/createIncomeOrExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new CreateIncomeOrExpenses();
                 }
             },
             {
@@ -92,7 +98,7 @@ export class Router {
                 template: 'templates/editCategoryIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new EditCategoryIncome();
                 }
             },
             {
@@ -101,7 +107,7 @@ export class Router {
                 template: 'templates/createCategoryIncome.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new CreateCategoryIncome();
                 }
             },
             {
@@ -110,7 +116,7 @@ export class Router {
                 template: 'templates/editCategoryExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new EditCategoryExpenses();
                 }
             },
             {
@@ -119,12 +125,12 @@ export class Router {
                 template: 'templates/createCategoryExpenses.html',
                 styles: 'styles/index.css',
                 load: () => {
-
+                    new CreateCategoryExpenses();
                 }
             },
-
         ]
     }
+
     async openRoute() {
         const urlRoute = window.location.hash.split('?')[0];
         if (urlRoute === '#/logout') {
@@ -154,7 +160,6 @@ export class Router {
         if (userInfo && accessToken) {
             this.profileFullNameElement.innerText = userInfo.fullName;
         }
-
         newRoute.load();
     }
 }

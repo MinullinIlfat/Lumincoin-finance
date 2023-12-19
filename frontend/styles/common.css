@@ -7,6 +7,7 @@
     font-family: Roboto-Medium;
     src: url("../fonts/Roboto-Medium.ttf");
 }
+
 @font-face {
     font-family: Roboto-Regular;
     src: url("../fonts/Roboto-Regular.ttf");
@@ -22,13 +23,11 @@ body {
 }
 
 .title {
-    font-family: Roboto-Medium,sans-serif;
+    font-family: Roboto-Medium, sans-serif;
     font-size: 40px;
-    color:#052C65;
+    color: #052C65;
     margin-bottom: 40px;
 }
-
-/**/
 
 .title {
     margin-bottom: 40px;
@@ -59,21 +58,28 @@ body {
     color: #CED4DA;
     text-align: center;
     text-decoration: none;
-    /*padding: 44px;*/
 }
 
 .popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000073;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.popup-box {
     max-width: 530px;
     border: 1px solid #CED4DA;
     border-radius: 12px;
     padding: 40px;
     box-sizing: border-box;
     text-align: center;
-    position: fixed;
-    top: 40%;
-    left: 30%;
     background: white;
-    display: none;
 }
 
 .popup-text {
@@ -91,12 +97,17 @@ body {
     padding: 11px 16px;
 }
 
+.btn-svg {
+    border: 0;
+    background: transparent;
+}
+
 .create {
     display: flex;
     flex-direction: column;
 }
 
-.create input {
+.create input, .create select {
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #6C757D;
@@ -104,16 +115,32 @@ body {
     line-height: 24px;
     padding: 7px 0 7px 16px;
     max-width: 397px;
+    appearance: none;
+    color: #6C757D;
+}
+
+.create-value input, .create-value select {
+    color: #000000;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
 }
 
 .category-item-add {
     cursor: pointer;
 }
 
-/**/
-
 .menu {
-    margin-bottom: 140px;
+    margin-bottom: 40px;
 }
 
 .menu ul li {
@@ -143,7 +170,27 @@ body {
     margin-bottom: 40px;
 }
 
+.menu label {
+    margin-right: 9px;
+}
+
+.menu input {
+    margin-right: 27px;
+    border: 0;
+    width: 85px;
+    color: #6C757D;
+    font-size: 16px;
+    line-height: 19px;
+    padding: 9px 0;
+}
+
+
 .button:hover, .button:active, .button:visited, .button:focus, .button:focus-visible {
+    background: #6C757D !important;
+    color: #FFFFFF !important;
+}
+
+.button.active {
     background: #6C757D !important;
     color: #FFFFFF !important;
 }
@@ -161,12 +208,23 @@ body {
     margin-left: 9px;
 }
 
-.table  a {
+.menu-date input {
+    border: 0
+}
+
+.table a {
     text-decoration: none;
 }
 
 .table svg {
     cursor: pointer;
+}
+
+.table-head th {
+    color: #052C65 !important;
+    font-family: Roboto-Medium, sans-serif;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .row-name-green {
@@ -180,6 +238,7 @@ body {
 .charts {
     display: flex;
     justify-content: center;
+    margin-top: 140px;
 }
 
 .charts span {
@@ -193,7 +252,6 @@ body {
 .chartjs-size-monitor {
     color: #000000;
     background: black;
-
 }
 
 .chart {

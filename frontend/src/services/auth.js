@@ -18,26 +18,22 @@ export class Auth {
             });
             if (response && response.status === 200) {
                 const result = await response.json();
-                if (result && result.error){
+                if (result && !result.error) {
                     this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
                     return true;
                 }
             }
         }
-
         this.removeTokens();
         location.href = '#/login';
         return false;
     }
 
-    // static async logout() {
-    //
-    // }
-
     static setTokens(accessToken, refreshToken) {
         localStorage.setItem(this.accessTokenKey, accessToken);
         localStorage.setItem(this.refreshTokenKey, refreshToken);
     }
+
     static removeTokens() {
         localStorage.removeItem(this.accessTokenKey);
         localStorage.removeItem(this.refreshTokenKey);

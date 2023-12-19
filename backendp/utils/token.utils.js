@@ -33,11 +33,13 @@ class TokenUtils {
     static verifyRefreshToken(refreshToken) {
         return new Promise((resolve, reject) => {
             const user = UserModel.findOne({refreshToken: refreshToken});
+            console.log(user)
             if (!user) {
                 return reject({error: true, message: "Invalid refresh token"});
             }
 
             jwt.verify(refreshToken, config.secret, (err, tokenDetails) => {
+                console.log(err)
                 if (err)
                     return reject({error: true, message: "Invalid refresh token"});
                 resolve({

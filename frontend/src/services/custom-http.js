@@ -10,7 +10,7 @@ export class CustomHttp {
             },
         };
 
-        let token = localStorage.getItem(Auth.accessTokenKey)
+        let token = localStorage.getItem(Auth.accessTokenKey);
         if (token) {
             params.headers['x-auth-token'] = token;
         }
@@ -23,17 +23,15 @@ export class CustomHttp {
 
         if (response.status < 200 || response.status >= 300) {
             if (response.status === 401) {
-                const result = Auth.processUnauthorizedResponse();
+                const result = await Auth.processUnauthorizedResponse();
                 if (result) {
                     return await this.request(url, method, body);
                 } else {
                     return null;
                 }
             }
-
             throw new Error(response.message);
         }
-
         return await response.json();
     }
 }
